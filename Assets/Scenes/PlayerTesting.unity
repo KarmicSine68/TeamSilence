@@ -509,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowingCamera
   cameraOffset: {x: 0, y: 10, z: -8}
+  roomDimensions: {x: 3, y: 3}
 --- !u!1 &1866228264
 GameObject:
   m_ObjectHideFlags: 0

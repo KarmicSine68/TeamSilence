@@ -12,6 +12,7 @@ public class FollowingCamera : MonoBehaviour
 {
     GameObject playerRef;
     [SerializeField] Vector3 cameraOffset;
+    [SerializeField] Vector2 roomDimensions;
 
     private void Start()
     {
@@ -20,6 +21,9 @@ public class FollowingCamera : MonoBehaviour
 
     private void Update()
     {
-        transform.position = playerRef.transform.position + cameraOffset;
+        Vector3 camPosition = playerRef.transform.position + cameraOffset;
+        transform.position = new Vector3(Mathf.Clamp(camPosition.x, -roomDimensions.x + cameraOffset.x, roomDimensions.x + cameraOffset.x)
+            , transform.position.y, Mathf.Clamp(camPosition.z, -roomDimensions.y + cameraOffset.z, roomDimensions.y + cameraOffset.z));
+        //transform.position = playerRef.transform.position + cameraOffset;
     }
 }
