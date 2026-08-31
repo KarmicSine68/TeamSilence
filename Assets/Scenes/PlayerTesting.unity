@@ -543,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
   pActions: {fileID: 1866228268}
   moveSpeed: 10
+  dashCooldownTime: 5
 --- !u!4 &1866228266
 Transform:
   m_ObjectHideFlags: 0

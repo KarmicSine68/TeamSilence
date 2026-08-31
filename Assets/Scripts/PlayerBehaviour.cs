@@ -8,6 +8,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using NaughtyAttributes;
+using System.Collections;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody rb;
     [Tooltip("How fast the player moves.")]
     [SerializeField] float moveSpeed;
+    [SerializeField] float dashCooldownTime;
+    bool canDash;
 
+    #region Input Stuff
     /// <summary>
     /// Sets initial components and input action variables
     /// </summary>
@@ -37,6 +41,25 @@ public class PlayerBehaviour : MonoBehaviour
     private void OnEnable()
     {
         interact.started += Interact_started;
+        dash.started += Dash_started;
+    }
+
+    /// <summary>
+    /// Player dashes if able to
+    /// </summary>
+    /// <param name="obj"></param>
+    private void Dash_started(InputAction.CallbackContext obj)
+    {
+        if(canDash)
+        {
+            Debug.Log("Dashing");
+            canDash = false;
+            StartCoroutine(DashCooldown());
+        }
+        else
+        {
+            Debug.Log("Dash not ready yet.");
+        }
     }
 
     /// <summary>
@@ -45,7 +68,26 @@ public class PlayerBehaviour : MonoBehaviour
     /// <param name="obj"></param>
     private void Interact_started(InputAction.CallbackContext obj)
     {
+        Debug.Log("Interacting");
+    }
 
+    /// <summary>
+    /// Disables the input system events so there aren't duplicates
+    /// </summary>
+    private void OnDisable()
+    {
+        pActions.currentActionMap.Disable();
+        interact.started -= Interact_started;
+        dash.started -= Dash_started;
+    }
+    #endregion
+
+    /// <summary>
+    /// Sets default variable values
+    /// </summary>
+    private void Start()
+    {
+        canDash = true;
     }
 
     /// <summary>
@@ -54,5 +96,12 @@ public class PlayerBehaviour : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y) * moveSpeed;
+    }
+
+    private IEnumerator DashCooldown()
+    {
+        yield return new WaitForSeconds(dashCooldownTime);
+        canDash = true;
+        Debug.Log("Dash is ready.");
     }
 }
