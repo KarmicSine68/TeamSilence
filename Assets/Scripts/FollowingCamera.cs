@@ -14,16 +14,24 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField] Vector3 cameraOffset;
     [SerializeField] Vector2 roomDimensions;
 
+    /// <summary>
+    /// Gets reference to the player
+    /// </summary>
     private void Start()
     {
         playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
     }
 
+    /// <summary>
+    /// Camera follows player. Makes sure to clamp camera to room size and offset the position from the player
+    /// </summary>
     private void Update()
     {
+        //Offsets the camera's position from the player's position
         Vector3 camPosition = playerRef.transform.position + cameraOffset;
+
+        //Clamps the camera to the boundaries of the room
         transform.position = new Vector3(Mathf.Clamp(camPosition.x, -roomDimensions.x + cameraOffset.x, roomDimensions.x + cameraOffset.x)
             , transform.position.y, Mathf.Clamp(camPosition.z, -roomDimensions.y + cameraOffset.z, roomDimensions.y + cameraOffset.z));
-        //transform.position = playerRef.transform.position + cameraOffset;
     }
 }

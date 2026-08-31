@@ -39,6 +39,10 @@ public class PlayerBehaviour : MonoBehaviour
         interact.started += Interact_started;
     }
 
+    /// <summary>
+    /// Code for when player presses the interact button
+    /// </summary>
+    /// <param name="obj"></param>
     private void Interact_started(InputAction.CallbackContext obj)
     {
 
