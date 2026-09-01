@@ -2,6 +2,7 @@
  * Author: Brad Dixon
  * File Name: PlayerBehaviour.cs
  * Creation Date: 8/31/2026
+ * Last Modified: 9/1/2026
  * Brief: Handles player movement and input actions
  * External Resources: N/A
  * ***************************************************************************/
@@ -9,30 +10,34 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using NaughtyAttributes;
 using System.Collections;
+using System.Collections.Generic;
 
-public class PlayerBehaviour : MonoBehaviour
+public class PlayerBehaviour : PlayerInputHandler
 {
-    [SerializeField] PlayerInput pActions;
-    InputAction move, interact, dash;
+    //PlayerInput pActions;
+    //InputAction move, interact, dash;
     Rigidbody rb;
     [Tooltip("How fast the player moves.")]
     [SerializeField] float moveSpeed;
     [SerializeField] float dashCooldownTime;
     bool canDash;
+    [SerializeField] GameObject playerModel;
+    //[SerializeField] List<>
 
     #region Input Stuff
     /// <summary>
     /// Sets initial components and input action variables
     /// </summary>
-    private void Awake()
+    protected override void Awake()
     {
-        pActions.currentActionMap.Enable();
-        move = pActions.currentActionMap.FindAction("Movement");
-        interact = pActions.currentActionMap.FindAction("Interact");
-        dash = pActions.currentActionMap.FindAction("Dash");
+        base.Awake();
+        //pActions = GetComponent<PlayerInput>();
+        //pActions.currentActionMap.Enable();
+        //move = pActions.currentActionMap.FindAction("Movement");
+        //interact = pActions.currentActionMap.FindAction("Interact");
+        //dash = pActions.currentActionMap.FindAction("Dash");
 
         rb = GetComponent<Rigidbody>();
-        Debug.Log("Here");
     }
 
     /// <summary>

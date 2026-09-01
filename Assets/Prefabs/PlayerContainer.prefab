@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 956766307435515101}
   - component: {fileID: 4029354588414262556}
   - component: {fileID: 7032399863964550624}
+  - component: {fileID: 3124971317179581620}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -33,7 +34,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8413350081735283183}
-  - {fileID: 3317411163388557766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &956766307435515101
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591e67766d2502c4a93294adcf6b7c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
-  pActions: {fileID: 4029354588414262556}
   moveSpeed: 10
   dashCooldownTime: 5
+  playerModel: {fileID: 0}
 --- !u!114 &4029354588414262556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +108,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3124971317179581620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653995301054526514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6474e8cbdb4b7479f8245e5e6c06dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponBehaviour
 --- !u!1 &3223459206470836935
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +133,7 @@ GameObject:
   - component: {fileID: 7915876551533410613}
   - component: {fileID: 7030872979746578529}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +151,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3317411163388557766}
   m_Father: {fileID: 5461317259510889173}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2025986973318477621
@@ -252,7 +265,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5461317259510889173}
+  m_Father: {fileID: 8413350081735283183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7222710041674206949
 MeshFilter:

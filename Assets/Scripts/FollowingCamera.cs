@@ -2,8 +2,9 @@
  * Author: Brad Dixon
  * File Name: FollowingCamera.cs
  * Creation Date: 8/31/2026
+ * Last Modified: 9/1/2026
  * Brief: Has the camera follow the player. Stays with the confines 
- * of the room.
+ *        of the room.
  * External Resources: N/A
  * ***************************************************************************/
 using UnityEngine;
