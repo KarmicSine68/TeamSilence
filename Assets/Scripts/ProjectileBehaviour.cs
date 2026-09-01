@@ -21,7 +21,10 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit something");
+        if(other.GetComponent<DummyBehaviour>())
+        {
+
+        }
     }
 
     private void Start()

@@ -126,9 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponBehaviour
   bulletPrefab: {fileID: 4550646152598636702, guid: a57cbdc0ece1a9a44b19e3c3e86c8911, type: 3}
-  bulletSpeed: 1
-  attackCooldown: 1
-  baseDamage: 5
+  bulletSpeed: 2
+  attackCooldown: 0.2
+  baseDamage: 3
 --- !u!1 &3223459206470836935
 GameObject:
   m_ObjectHideFlags: 0
