@@ -40,10 +40,20 @@
                     "name": "Aim",
                     "type": "Value",
                     "id": "1563b569-0276-499b-bb06-ef30a1230ed8",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true,
+                    "priority": 0
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "eb1be456-5328-404b-ab7f-8427ca0546b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
                     "priority": 0
                 }
             ],
@@ -133,6 +143,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dcbc26e-74b9-4236-812a-abefc4aa9403",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

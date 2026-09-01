@@ -523,6 +523,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 3124971317179581620, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      propertyPath: bulletSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5461317259510889173, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

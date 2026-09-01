@@ -13,6 +13,10 @@ public class FollowingCamera : MonoBehaviour
 {
     GameObject playerRef;
     [SerializeField] Vector3 cameraOffset;
+    public Vector3 CameraOffset
+    {
+        get => cameraOffset;
+    }
     [SerializeField] Vector2 roomDimensions;
 
     /// <summary>
@@ -31,8 +35,13 @@ public class FollowingCamera : MonoBehaviour
         //Offsets the camera's position from the player's position
         Vector3 camPosition = playerRef.transform.position + cameraOffset;
 
+        //Delete when clamping works with relative player position
+        transform.position = camPosition;
+
+        //Clamping causes the mouse position to not be fully relative to the player.
+        //Will work on fixing later, prioritizing the functionality of the player first
         //Clamps the camera to the boundaries of the room
-        transform.position = new Vector3(Mathf.Clamp(camPosition.x, -roomDimensions.x + cameraOffset.x, roomDimensions.x + cameraOffset.x)
-            , transform.position.y, Mathf.Clamp(camPosition.z, -roomDimensions.y + cameraOffset.z, roomDimensions.y + cameraOffset.z));
+        //transform.position = new Vector3(Mathf.Clamp(camPosition.x, -roomDimensions.x + cameraOffset.x, roomDimensions.x + cameraOffset.x)
+        //    , transform.position.y, Mathf.Clamp(camPosition.z, -roomDimensions.y + cameraOffset.z, roomDimensions.y + cameraOffset.z));
     }
 }

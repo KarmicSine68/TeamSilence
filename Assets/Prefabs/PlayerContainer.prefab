@@ -120,6 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6474e8cbdb4b7479f8245e5e6c06dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponBehaviour
+  bulletPrefab: {fileID: 4550646152598636702, guid: a57cbdc0ece1a9a44b19e3c3e86c8911, type: 3}
+  attackCooldown: 1
+  baseDamage: 5
 --- !u!1 &3223459206470836935
 GameObject:
   m_ObjectHideFlags: 0

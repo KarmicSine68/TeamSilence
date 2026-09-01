@@ -13,7 +13,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
     protected PlayerInput pActions;
     protected InputAction move, interact, dash;
-    protected InputAction aim;
+    protected InputAction aim, shoot;
 
     /// <summary>
     /// Initializes the player input variables
@@ -26,5 +26,6 @@ public class PlayerInputHandler : MonoBehaviour
         interact = pActions.currentActionMap.FindAction("Interact");
         dash = pActions.currentActionMap.FindAction("Dash");
         aim = pActions.currentActionMap.FindAction("Aim");
+        shoot = pActions.currentActionMap.FindAction("Shoot");
     }
 }

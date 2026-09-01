@@ -9,11 +9,89 @@
  * ***************************************************************************/
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class WeaponBehaviour : PlayerInputHandler
 {
-    private void FixedUpdate()
+    GameObject playerRef;
+    FollowingCamera mainCam;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] float attackCooldown;
+    bool canAttack;
+    bool pressingAttack;
+    [SerializeField] int baseDamage;
+    Vector3 bulletTrajectory;
+
+    /// <summary>
+    /// Gets references to other game objects
+    /// </summary>
+    override protected void Awake()
     {
-        Debug.Log(aim.ReadValue<Vector2>());
+        base.Awake();
+        mainCam = Camera.main.GetComponent<FollowingCamera>();
+        playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
+        canAttack = true;
+    }
+
+    protected void OnEnable()
+    {
+        shoot.started += Shoot_performed;
+        shoot.canceled += Shoot_canceled;
+    }
+
+    protected void OnDisable()
+    {
+        shoot.started -= Shoot_performed;
+        shoot.canceled -= Shoot_canceled;
+    }
+
+    protected void Shoot_canceled(InputAction.CallbackContext obj)
+    {
+        pressingAttack = false;
+    }
+
+    protected void Shoot_performed(InputAction.CallbackContext obj)
+    {
+        pressingAttack = true;
+    }
+
+    /// <summary>
+    /// How long a weapon has to wait before attacking again.
+    /// </summary>
+    /// <returns></returns>
+    protected IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
+    }
+
+    /// <summary>
+    /// Gets the mouse's position, relative to the player
+    /// </summary>
+    protected void FixedUpdate()
+    {
+        float camDistanceFromPlayer = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
+        Vector3 worldPos = aim.ReadValue<Vector2>();
+        worldPos.z = Mathf.Abs(camDistanceFromPlayer);
+        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
+            playerRef.transform.position.y);
+
+        if(pressingAttack && canAttack)
+        {
+            AttackWithWeapon();
+        }
+    }
+
+    /// <summary>
+    /// Spawns a bullet and moves it where the player aims
+    /// </summary>
+    virtual protected void AttackWithWeapon()
+    {
+        GameObject bulletTemp = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bulletTemp.GetComponent<ProjectileBehaviour>().ProjectileDamage = baseDamage;
+        bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory.normalized * bulletSpeed;
+        canAttack = false;
+        StartCoroutine(AttackCooldown());
     }
 }
