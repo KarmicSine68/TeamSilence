@@ -74,12 +74,33 @@ public class WeaponBehaviour : PlayerInputHandler
         float camDistanceFromPlayer = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
         Vector3 worldPos = aim.ReadValue<Vector2>();
         worldPos.z = Mathf.Abs(camDistanceFromPlayer);
-        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
-            playerRef.transform.position.y);
+        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
+            playerRef.transform.position.y)).normalized;
+
+        //Debug.Log(Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
+        //    playerRef.transform.position.y)).normalized);
+        NormalizeDirection();
 
         if(pressingAttack && canAttack)
         {
             AttackWithWeapon();
+        }
+    }
+
+    void NormalizeDirection()
+    {
+        bulletTrajectory.y = 0;
+        if (Mathf.Abs(bulletTrajectory.z) < .5f)
+        {
+            int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
+            bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
+            Debug.Log(bulletTrajectory);
+        }
+        else
+        {
+            int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
+            bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
+            Debug.Log(bulletTrajectory);
         }
     }
 
@@ -90,6 +111,7 @@ public class WeaponBehaviour : PlayerInputHandler
     {
         GameObject bulletTemp = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bulletTemp.GetComponent<ProjectileBehaviour>().ProjectileDamage = baseDamage;
+
         bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory.normalized * bulletSpeed;
         canAttack = false;
         StartCoroutine(AttackCooldown());
