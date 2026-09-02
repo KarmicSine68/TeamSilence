@@ -87,10 +87,13 @@ public class WeaponBehaviour : PlayerInputHandler
         }
     }
 
+    /// <summary>
+    /// Alter the direction to make the bullet accurately line up with the mouse's positon
+    /// </summary>
     void NormalizeDirection()
     {
         bulletTrajectory.y = 0;
-        if (Mathf.Abs(bulletTrajectory.z) < .8f) //< Mathf.Abs(bulletTrajectory.x))
+        if (Mathf.Abs(bulletTrajectory.z) <= .8f) //Using .8 because the z tends to be an accurate metric up to this number
         {
             int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
             bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
@@ -112,7 +115,7 @@ public class WeaponBehaviour : PlayerInputHandler
         GameObject bulletTemp = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bulletTemp.GetComponent<ProjectileBehaviour>().ProjectileDamage = baseDamage;
 
-        bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory.normalized * bulletSpeed;
+        bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory * bulletSpeed;
         canAttack = false;
         StartCoroutine(AttackCooldown());
     }
