@@ -22,6 +22,8 @@ public class WeaponBehaviour : PlayerInputHandler
     bool pressingAttack;
     [SerializeField] int baseDamage;
     Vector3 bulletTrajectory;
+    [Tooltip("The percentage in which the bullets should deviate by in their trajectory")]
+    [SerializeField] float bulletDeviation;
 
     /// <summary>
     /// Gets references to other game objects
@@ -107,6 +109,18 @@ public class WeaponBehaviour : PlayerInputHandler
         }
     }
 
+    void AddDeviation()
+    {
+        //Convert bullet into percentage if not already
+        if(bulletDeviation > 1)
+        {
+            bulletDeviation /= 100f;
+        }
+
+        bulletTrajectory.x += Random.Range(-bulletDeviation, bulletDeviation);
+        bulletTrajectory.z += Random.Range(-bulletDeviation, bulletDeviation);
+    }
+
     /// <summary>
     /// Spawns a bullet and moves it where the player aims
     /// </summary>
@@ -114,6 +128,8 @@ public class WeaponBehaviour : PlayerInputHandler
     {
         GameObject bulletTemp = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         bulletTemp.GetComponent<ProjectileBehaviour>().ProjectileDamage = baseDamage;
+
+        AddDeviation();
 
         bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory * bulletSpeed;
         canAttack = false;
