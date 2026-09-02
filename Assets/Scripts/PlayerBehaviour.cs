@@ -129,6 +129,7 @@ public class PlayerBehaviour : PlayerInputHandler
     private void PlayerDash()
     {
         invincible = true;
+        Debug.Log("I'M INVINCIBLE");
         //If player is stationary, dash to the right
         if (rb.linearVelocity == Vector3.zero)
         {
@@ -194,6 +195,7 @@ public class PlayerBehaviour : PlayerInputHandler
     IEnumerator ITime(float time)
     {
         yield return new WaitForSeconds(time);
+        Debug.Log("I'M MORTAL!!!");
         invincible = false;
     }
 }
