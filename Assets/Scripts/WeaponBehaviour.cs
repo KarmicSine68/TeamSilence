@@ -2,7 +2,7 @@
  * Author: Brad Dixon
  * File Name: WeaponBehaviour.cs
  * Creation Date: 9/1/2026
- * Last Modified: 9/1/2026
+ * Last Modified: 9/2/2026
  * Brief: The basic class the weapons inherit from. Handles aiming 
  *        and attack calling
  * External Resources: N/A
@@ -36,23 +36,37 @@ public class WeaponBehaviour : PlayerInputHandler
         canAttack = true;
     }
 
+    /// <summary>
+    /// Enables the player input functions
+    /// </summary>
     protected void OnEnable()
     {
         shoot.started += Shoot_performed;
         shoot.canceled += Shoot_canceled;
     }
 
+    /// <summary>
+    /// Disables player input functions to avoid duplicates on reload
+    /// </summary>
     protected void OnDisable()
     {
         shoot.started -= Shoot_performed;
         shoot.canceled -= Shoot_canceled;
     }
 
+    /// <summary>
+    /// Tells the code that the player isn't pressing the attack button anymore
+    /// </summary>
+    /// <param name="obj"></param>
     protected void Shoot_canceled(InputAction.CallbackContext obj)
     {
         pressingAttack = false;
     }
 
+    /// <summary>
+    /// Tells the code that the player is pressing the attack button
+    /// </summary>
+    /// <param name="obj"></param>
     protected void Shoot_performed(InputAction.CallbackContext obj)
     {
         pressingAttack = true;
@@ -109,6 +123,9 @@ public class WeaponBehaviour : PlayerInputHandler
         }
     }
 
+    /// <summary>
+    /// Adds trajectory deviation to the bullet
+    /// </summary>
     void AddDeviation()
     {
         //Convert bullet into percentage if not already

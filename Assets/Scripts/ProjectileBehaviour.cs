@@ -2,7 +2,7 @@
  * Author: Brad Dixon
  * File Name: ProjectileBehaviour.cs
  * Creation Date: 9/1/2026
- * Last Modified: 9/1/2026
+ * Last Modified: 9/2/2026
  * Brief: Handles damaging enemys when it hits them
  * External Resources: N/A
  * ***************************************************************************/
@@ -19,14 +19,24 @@ public class ProjectileBehaviour : MonoBehaviour
     }
     [SerializeField] float lifeTime;
 
+    /// <summary>
+    /// What happens when a bullet touches something
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<DummyBehaviour>())
         {
-
+            other.GetComponent<DummyBehaviour>().TakeDamage(projectileDamage);
         }
+
+        //Bullet should destroy when hitting anything
+        Destroy(this.gameObject);
     }
 
+    /// <summary>
+    /// Starts the timer for how long bullets should be alive
+    /// </summary>
     private void Start()
     {
         StartCoroutine(ProjectileLifeTime());

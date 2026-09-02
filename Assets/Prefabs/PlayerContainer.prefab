@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4029354588414262556}
   - component: {fileID: 7032399863964550624}
   - component: {fileID: 3124971317179581620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +129,7 @@ MonoBehaviour:
   bulletSpeed: 2
   attackCooldown: 0.2
   baseDamage: 3
+  bulletDeviation: 0
 --- !u!1 &3223459206470836935
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ GameObject:
   - component: {fileID: 2025986973318477621}
   - component: {fileID: 7915876551533410613}
   - component: {fileID: 7030872979746578529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +254,7 @@ GameObject:
   - component: {fileID: 3317411163388557766}
   - component: {fileID: 7222710041674206949}
   - component: {fileID: 987953521894689927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
