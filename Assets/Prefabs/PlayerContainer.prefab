@@ -129,7 +129,7 @@ MonoBehaviour:
   bulletSpeed: 2
   attackCooldown: 0.2
   baseDamage: 3
-  bulletDeviation: 0
+  bulletDeviation: 10
 --- !u!1 &3223459206470836935
 GameObject:
   m_ObjectHideFlags: 0

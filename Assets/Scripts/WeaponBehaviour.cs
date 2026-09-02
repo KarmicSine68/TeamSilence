@@ -90,11 +90,11 @@ public class WeaponBehaviour : PlayerInputHandler
         float camDistanceFromPlayer = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
         Vector3 worldPos = aim.ReadValue<Vector2>();
         worldPos.z = Mathf.Abs(camDistanceFromPlayer);
-        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
-            playerRef.transform.position.y)).normalized;
+        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
+            playerRef.transform.position.y);
 
-        Debug.Log(Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
-            playerRef.transform.position.y)).normalized);
+        bulletTrajectory = bulletTrajectory.normalized;
+        Debug.Log(bulletTrajectory);
         NormalizeDirection();
 
         if(pressingAttack && canAttack)
