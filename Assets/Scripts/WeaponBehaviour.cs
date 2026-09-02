@@ -93,6 +93,7 @@ public class WeaponBehaviour : PlayerInputHandler
         bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
             playerRef.transform.position.y);
 
+        bulletTrajectory.z -= playerRef.transform.position.z;
         bulletTrajectory = bulletTrajectory.normalized;
         Debug.Log(bulletTrajectory);
         NormalizeDirection();
@@ -113,13 +114,13 @@ public class WeaponBehaviour : PlayerInputHandler
         {
             int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
             bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
-            Debug.Log(bulletTrajectory);
+            //Debug.Log(bulletTrajectory);
         }
         else
         {
             int negativeValue = bulletTrajectory.z < 0 ? -1 : 1;
             bulletTrajectory.z = (1 - Mathf.Abs(bulletTrajectory.x)) * negativeValue;
-            Debug.Log(bulletTrajectory);
+            //Debug.Log(bulletTrajectory);
         }
     }
 
