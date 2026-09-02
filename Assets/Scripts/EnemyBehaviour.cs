@@ -25,6 +25,9 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] Material enemyMaterial;
     [SerializeField] float delayBeforeAttack;
 
+    [SerializeField] GameObject bulletProjectile;
+    [SerializeField] float bulletSpeed;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,7 +72,6 @@ public class EnemyBehaviour : MonoBehaviour
 
             dir *= -1;
 
-            Debug.Log(dir.normalized);
             rb.linearVelocity = dir.normalized * moveSpeed;
 
             yield return new WaitForSeconds(.1f);
@@ -89,6 +91,13 @@ public class EnemyBehaviour : MonoBehaviour
         enemyMaterial.color = attackColor;
         yield return new WaitForSeconds(delayBeforeAttack);
         enemyMaterial.color = originalColor;
+
+        Vector3 bulletDir = transform.position - playerRef.transform.position;
+
+        bulletDir *= -1;
+
+        GameObject temp = Instantiate(bulletProjectile, transform.position, Quaternion.identity);
+        temp.GetComponent<Rigidbody>().linearVelocity = bulletDir.normalized * bulletSpeed;
         RandomlyRun();
     }
 

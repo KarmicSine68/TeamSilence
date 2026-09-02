@@ -156,6 +156,8 @@ MonoBehaviour:
   attackColor: {r: 0.70585763, g: 0.15226057, b: 0.8867924, a: 0}
   enemyMaterial: {fileID: 0}
   delayBeforeAttack: 1
+  bulletProjectile: {fileID: 4550646152598636702, guid: fe064a172e5e8a94ea3dcb73b9ea3fb8, type: 3}
+  bulletSpeed: 2
 --- !u!135 &21226973
 SphereCollider:
   m_ObjectHideFlags: 0
