@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 3646302097428422562}
   - component: {fileID: 6662498517420441334}
   - component: {fileID: 5129608425246201444}
+  - component: {fileID: 2327718124373136271}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -594,6 +595,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2327718124373136271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1499803095441201731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d9ef9ac807d1f40838d785faa5a447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
+  TeleportSpot: {fileID: 0}
+  left: 0
 --- !u!1 &1622467241325129639
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +621,7 @@ GameObject:
   - component: {fileID: 1034967452896476753}
   - component: {fileID: 208852010707484658}
   - component: {fileID: 9071951290522578169}
+  - component: {fileID: 6266434505777259246}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -706,6 +722,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6266434505777259246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1622467241325129639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d9ef9ac807d1f40838d785faa5a447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
+  TeleportSpot: {fileID: 0}
+  left: 0
 --- !u!1 &2645955670243415558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,6 +1454,7 @@ GameObject:
   - component: {fileID: 4223534935489970981}
   - component: {fileID: 8787282319266424750}
   - component: {fileID: 1056251066305935460}
+  - component: {fileID: 4566929355882870753}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -1524,6 +1555,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4566929355882870753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959026516431305377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d9ef9ac807d1f40838d785faa5a447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
+  TeleportSpot: {fileID: 0}
+  left: 1
 --- !u!1 &5514761218125186136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1594,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5514761218125186136}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1560,7 +1605,7 @@ Transform:
   - {fileID: 1257572612543440730}
   - {fileID: 2062170984984179611}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &4654543944089364253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1574,10 +1619,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   RoomCost: 15
-  RoomDoors:
-  - {fileID: 5917857478379267200}
-  - {fileID: 8156284504477463217}
-  - {fileID: 439171125481109265}
+  RotateAmount: 90
+  DoorForward: {fileID: 6266434505777259246}
+  DoorBackwards: {fileID: 4566929355882870753}
+  DoorOffshoot: {fileID: 2327718124373136271}
+  roomEntranceSpawn: {fileID: 5514761218125186136}
+  roomBacktrackSpawn: {fileID: 5514761218125186136}
+  roomBacktrackOffshootSpawn: {fileID: 5514761218125186136}
 --- !u!1 &5917857478379267200
 GameObject:
   m_ObjectHideFlags: 0

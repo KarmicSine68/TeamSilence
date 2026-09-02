@@ -6,6 +6,7 @@ using UnityEngine;
 public class RoomData : MonoBehaviour
 {
     public int RoomCost;
+    public int RotateAmount;
     public Door DoorForward;
     public Door DoorBackwards;
     public Door DoorOffshoot;
