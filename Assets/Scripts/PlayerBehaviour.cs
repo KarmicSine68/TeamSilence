@@ -110,6 +110,10 @@ public class PlayerBehaviour : PlayerInputHandler
         {
             rb.linearVelocity = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y) * moveSpeed;
         }
+        else
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
     }
 
     /// <summary>
