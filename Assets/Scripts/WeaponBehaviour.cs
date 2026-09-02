@@ -77,8 +77,8 @@ public class WeaponBehaviour : PlayerInputHandler
         bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
             playerRef.transform.position.y)).normalized;
 
-        //Debug.Log(Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
-        //    playerRef.transform.position.y)).normalized);
+        Debug.Log(Camera.main.ScreenToWorldPoint(worldPos - new Vector3(playerRef.transform.position.x,
+            playerRef.transform.position.y)).normalized);
         NormalizeDirection();
 
         if(pressingAttack && canAttack)
@@ -90,7 +90,7 @@ public class WeaponBehaviour : PlayerInputHandler
     void NormalizeDirection()
     {
         bulletTrajectory.y = 0;
-        if (Mathf.Abs(bulletTrajectory.z) < .5f)
+        if (Mathf.Abs(bulletTrajectory.z) < .8f) //< Mathf.Abs(bulletTrajectory.x))
         {
             int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
             bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
@@ -98,8 +98,8 @@ public class WeaponBehaviour : PlayerInputHandler
         }
         else
         {
-            int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
-            bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
+            int negativeValue = bulletTrajectory.z < 0 ? -1 : 1;
+            bulletTrajectory.z = (1 - Mathf.Abs(bulletTrajectory.x)) * negativeValue;
             Debug.Log(bulletTrajectory);
         }
     }
