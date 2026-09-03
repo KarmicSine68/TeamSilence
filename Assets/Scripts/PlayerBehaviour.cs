@@ -237,7 +237,13 @@ public class PlayerBehaviour : PlayerInputHandler
 
     void updateUI()
     {
-        Health.text = "Health: " + currentHealth.ToString();
-        Dash.text = "Dash: " + canDash.ToString();
+        if(Health != null)
+        {
+            Health.text = "Health: " + currentHealth.ToString();
+        }
+        if(dash != null)
+        {
+            Dash.text = "Dash: " + canDash.ToString();
+        }
     }
 }
