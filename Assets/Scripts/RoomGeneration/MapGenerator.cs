@@ -9,6 +9,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private List<GameObject> Rooms;
     public GameObject StartingRoom;
 
+    public GameObject WinText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
