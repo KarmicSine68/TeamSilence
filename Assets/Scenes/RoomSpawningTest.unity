@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 407796876}
   - component: {fileID: 407796875}
   - component: {fileID: 407796878}
+  - component: {fileID: 407796879}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -205,13 +206,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407796874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.11386465, y: 0.86742806, z: -0.23242669, w: 0.4249486}
+  m_LocalPosition: {x: -7, y: 5, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 127.8, z: 0}
 --- !u!114 &407796878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,20 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &407796879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407796874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0b1b29b58a6054a821464df7d7f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FollowingCamera
+  cameraOffset: {x: -7, y: 5, z: 7}
+  roomDimensions: {x: 0, y: 0}
 --- !u!1 &1406846218
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3223459206470836935, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5461317259510889173, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -372,8 +387,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1653995301054526514, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1898301508}
   m_SourcePrefab: {fileID: 100100000, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+--- !u!1 &1898301502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1653995301054526514, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+  m_PrefabInstance: {fileID: 1857316554}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1898301508
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898301502}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1937266610
 GameObject:
   m_ObjectHideFlags: 0

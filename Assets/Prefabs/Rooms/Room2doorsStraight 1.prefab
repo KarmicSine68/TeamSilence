@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   RoomCost: 10
-  RotateAmount: 90
+  RotateAmount: -90
   DoorForward: {fileID: 1923452700261620085}
   DoorBackwards: {fileID: 7146103488184805159}
   DoorOffshoot: {fileID: 0}
