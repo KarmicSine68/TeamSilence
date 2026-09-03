@@ -18,5 +18,11 @@ public class Door : MonoBehaviour
         
     }
 
-    //on Interact with the door move player to teleport spot
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.transform.position = TeleportSpot.transform.position;
+        }
+    }
 }
