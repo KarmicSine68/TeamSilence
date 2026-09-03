@@ -41,7 +41,7 @@ public class ProjectileBehaviour : MonoBehaviour
         //Damage Enemy
         if (other.GetComponentInParent<EnemyBehaviour>())
         {
-           // other.GetComponentInParent<PlayerBehaviour>().TakeDamage(projectileDamage);
+           other.GetComponentInParent<EnemyBehaviour>().TakeDamage(projectileDamage);
         }
 
         //Bullet should destroy when hitting anything

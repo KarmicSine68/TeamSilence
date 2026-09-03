@@ -16,6 +16,9 @@ public class EnemyBehaviour : MonoBehaviour
     Rigidbody rb;
     GameObject playerRef;
 
+    [SerializeField] int maxHealth;
+    int currentHealth;
+
     [SerializeField] float moveSpeed;
     [SerializeField] float minRunTime;
     [SerializeField] float maxRunTime;
@@ -44,6 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
         enemyMaterial = GetComponentInChildren<MeshRenderer>().material;
+        currentHealth = maxHealth;
         if(playerInRange)
         {
             AttackPlayer();
@@ -76,6 +80,21 @@ public class EnemyBehaviour : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(this.gameObject);
     }
 
     /// <summary>
