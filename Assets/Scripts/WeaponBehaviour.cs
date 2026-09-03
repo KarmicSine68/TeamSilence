@@ -95,7 +95,7 @@ public class WeaponBehaviour : PlayerInputHandler
 
         bulletTrajectory.z -= playerRef.transform.position.z;
         bulletTrajectory = bulletTrajectory.normalized;
-        Debug.Log(bulletTrajectory);
+        //Debug.Log(bulletTrajectory);
         NormalizeDirection();
 
         if(pressingAttack && canAttack)
