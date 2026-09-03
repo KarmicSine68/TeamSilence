@@ -65,9 +65,4 @@ public class ProjectileBehaviour : MonoBehaviour
         yield return new WaitForSeconds(lifeTime);
         Destroy(this.gameObject);
     }
-
-    private void FixedUpdate()
-    {
-        vel = GetComponent<Rigidbody>().linearVelocity;
-    }
 }

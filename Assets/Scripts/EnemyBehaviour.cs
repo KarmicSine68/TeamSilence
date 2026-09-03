@@ -2,7 +2,7 @@
  * Author: Brad Dixon
  * File Name: EnemyBehaviour.cs
  * Creation Date: 9/2/2026
- * Last Modified: 9/2/2026
+ * Last Modified: 9/3/2026
  * Brief: Controls the enemy's actions
  * External Resources: N/A
  * ***************************************************************************/
@@ -36,6 +36,9 @@ public class EnemyBehaviour : MonoBehaviour
 
     Vector3 bulletDir;
 
+    /// <summary>
+    /// Sets variables and determines which state the enemy starts in
+    /// </summary>
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,6 +54,10 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Tells the enemy player is in range
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponentInParent<PlayerBehaviour>())
@@ -59,6 +66,10 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Tells the enemy the player is no longer in range
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponentInParent<PlayerBehaviour>())
@@ -67,49 +78,77 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// State function for the enemy's move state
+    /// </summary>
     void MoveToPlayer()
     {
         StartCoroutine(MoveUntilInRange());
     }
 
+    /// <summary>
+    /// Loops through until the enemy's trigger box detects the player
+    /// </summary>
+    /// <returns></returns>
     IEnumerator MoveUntilInRange()
     {
         while(!playerInRange)
         {
+            //Find direction the player is in
             Vector3 dir = transform.position - playerRef.transform.position;
 
             dir *= -1;
 
+            //Move to player
             rb.linearVelocity = dir.normalized * moveSpeed;
 
             yield return new WaitForSeconds(.1f);
         }
+
+        //Change state
         AttackPlayer();
     }
 
+    /// <summary>
+    /// Enemy stops moving and enters attack state
+    /// </summary>
     void AttackPlayer()
     {
         rb.linearVelocity = Vector3.zero;
         StartCoroutine(AttackDelay());
     }
 
+    /// <summary>
+    /// Enemy waits x amount of time before starting their attack
+    /// </summary>
+    /// <returns></returns>
     IEnumerator AttackDelay()
     {
+        //Visual to show that the enemy is going to attack
         Color originalColor = enemyMaterial.color;
         enemyMaterial.color = attackColor;
         yield return new WaitForSeconds(delayBeforeAttack);
+
+        //Enemy starts attack
         enemyMaterial.color = originalColor;
 
+        //Allows enemy to fire in multiple bursts
         for (int i = 0; i < burstCount; ++i)
         {
             SpawnCone();
             yield return new WaitForSeconds(burstDelay);
         }
+
+        //Enter next state
         RandomlyRun();
     }
 
+    /// <summary>
+    /// Spawns the projectiles in a cone. How the enemy is able to shoot multiple projectiles at once
+    /// </summary>
     void SpawnCone()
     {
+        //Bullet's original trajectory. Used to build spread off of
         Vector3 originalDir = transform.position - playerRef.transform.position;
 
         originalDir *= -1;
@@ -117,6 +156,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         bulletDir = originalDir;
 
+        //If projectile count is odd, fire the first bullet directly at player
         if(projectileCount % 2 == 1)
         {
             GameObject temp = Instantiate(bulletProjectile, transform.position, Quaternion.identity);
@@ -127,9 +167,11 @@ public class EnemyBehaviour : MonoBehaviour
         float bulletSpread = 0;
 
         int j = 0;
+        //Spreads the remaining bullets outwards by a set degree
         for (int i = projectileCount % 2; i < projectileCount; ++i)
         {
             bulletDir = originalDir;
+            //Every two bullets, increase the spread degree
             if (j % 2 == 0)
             {
                 bulletSpread += CalculateSpread();
@@ -137,6 +179,7 @@ public class EnemyBehaviour : MonoBehaviour
             GameObject temp = Instantiate(bulletProjectile, transform.position, Quaternion.identity);
 
             float r = bulletDir.x + bulletSpread;
+            //If statements used to wrap the float value if it exceeds 1 or -1
             if(r > 1)
             {
                 bulletDir.x = 1 - (r - 1);
@@ -163,16 +206,17 @@ public class EnemyBehaviour : MonoBehaviour
                 bulletDir.z += bulletSpread;
             }
 
-            //NormalizeDirection();
+            NormalizeDirection();
 
             temp.GetComponent<Rigidbody>().linearVelocity = bulletDir.normalized * bulletSpeed;
+            //Allows the spread to go in both directions
             bulletSpread *= -1;
             ++j;
         }
     }
 
     /// <summary>
-    /// Alter the direction to make the bullet accurately line up with the mouse's positon
+    /// Alter the direction to make the bullet accurately line up with the player's position
     /// </summary>
     void NormalizeDirection()
     {
@@ -181,33 +225,44 @@ public class EnemyBehaviour : MonoBehaviour
         {
             int negativeValue = bulletDir.x < 0 ? -1 : 1;
             bulletDir.x = (1 - Mathf.Abs(bulletDir.z)) * negativeValue;
-            //Debug.Log(bulletTrajectory);
         }
         else
         {
             int negativeValue = bulletDir.z < 0 ? -1 : 1;
             bulletDir.z = (1 - Mathf.Abs(bulletDir.x)) * negativeValue;
-            //Debug.Log(bulletTrajectory);
         }
     }
 
+    /// <summary>
+    /// Converts the degree into a decimal point
+    /// </summary>
+    /// <returns></returns>
     float CalculateSpread()
     {
         return (coneDegree / 180);
     }
 
+    /// <summary>
+    /// Pick a random direction to run along
+    /// </summary>
     void RandomlyRun()
     {
+        //Randomize direction
         Vector3 randomDirection = Vector3.zero;
         randomDirection.x = Random.Range(-1, 1);
         randomDirection.z = Random.Range(-1, 1);
 
         rb.linearVelocity = randomDirection.normalized * moveSpeed;
 
+        //This makes the time the enemy spends in the run state random
         runTime = Random.Range(minRunTime, maxRunTime);
         StartCoroutine(RunAwayTime());
     }
 
+    /// <summary>
+    /// Move to next state when done running
+    /// </summary>
+    /// <returns></returns>
     IEnumerator RunAwayTime()
     {
         yield return new WaitForSeconds(runTime);
