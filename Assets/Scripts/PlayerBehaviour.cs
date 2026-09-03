@@ -167,6 +167,28 @@ public class PlayerBehaviour : PlayerInputHandler
     }
 
     /// <summary>
+    /// Direction knockback
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="attackDir"></param>
+    public void TakeDamage(int damage, Vector3 attackDir)
+    {
+        if (!invincible)
+        {
+            invincible = true;
+            StartCoroutine(ITime(invinvibilityTimeWhenHit));
+            currentHealth -= damage;
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        rb.AddForce(attackDir, ForceMode.Impulse);
+    }
+
+    /// <summary>
     /// When the player's health reaches 0
     /// </summary>
     void Die()
