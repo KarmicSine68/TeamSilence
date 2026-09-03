@@ -18,6 +18,7 @@ public class ProjectileBehaviour : MonoBehaviour
         set => projectileDamage = value;
     }
     [SerializeField] float lifeTime;
+    [SerializeField] Vector3 vel;
 
     /// <summary>
     /// What happens when a bullet touches something
@@ -25,9 +26,22 @@ public class ProjectileBehaviour : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        //Damage dummy
         if(other.GetComponent<DummyBehaviour>())
         {
             other.GetComponent<DummyBehaviour>().TakeDamage(projectileDamage);
+        }
+
+        //Damage player
+        if(other.GetComponentInParent<PlayerBehaviour>())
+        {
+            other.GetComponentInParent<PlayerBehaviour>().TakeDamage(projectileDamage, GetComponent<Rigidbody>().linearVelocity);
+        }
+
+        //Damage Enemy
+        if (other.GetComponentInParent<EnemyBehaviour>())
+        {
+           // other.GetComponentInParent<PlayerBehaviour>().TakeDamage(projectileDamage);
         }
 
         //Bullet should destroy when hitting anything
@@ -50,5 +64,10 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
         Destroy(this.gameObject);
+    }
+
+    private void FixedUpdate()
+    {
+        vel = GetComponent<Rigidbody>().linearVelocity;
     }
 }
