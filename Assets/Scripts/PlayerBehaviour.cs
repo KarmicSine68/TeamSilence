@@ -4,7 +4,7 @@
  * Creation Date: 8/31/2026
  * Last Modified: 9/1/2026
  * Brief: Handles player movement and input actions
- * External Resources: N/A
+ * External Resources: https://discussions.unity.com/t/camera-relative-movement/763440/4
  * ***************************************************************************/
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -108,7 +108,12 @@ public class PlayerBehaviour : PlayerInputHandler
     {
         if (alive)
         {
-            rb.linearVelocity = new Vector3(move.ReadValue<Vector2>().x, 0, move.ReadValue<Vector2>().y) * moveSpeed;
+            Vector3 xMove = move.ReadValue<Vector2>().x * Camera.main.transform.right;
+            Vector3 zMove = move.ReadValue<Vector2>().y * Camera.main.transform.forward;
+            rb.linearVelocity = (xMove + zMove) * moveSpeed;
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+
+            rb.linearVelocity = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0) * rb.linearVelocity;
         }
         else
         {
