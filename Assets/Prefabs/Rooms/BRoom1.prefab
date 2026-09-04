@@ -442,10 +442,10 @@ MonoBehaviour:
   RotateAmount: 90
   DoorForward: {fileID: 6015241894037920342}
   DoorBackwards: {fileID: 3300115616177208653}
-  DoorOffshoot: {fileID: 6015241894037920342}
+  DoorOffshoot: {fileID: 4024885398200564506}
   roomEntranceSpawn: {fileID: 5970621996224317733}
-  roomBacktrackSpawn: {fileID: 8615868141802278987}
-  roomBacktrackOffshootSpawn: {fileID: 1586568882636867391}
+  roomBacktrackSpawn: {fileID: 1586568882636867391}
+  roomBacktrackOffshootSpawn: {fileID: 8615868141802278987}
 --- !u!1 &1557879912554799591
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 2235425212440065904}
   - component: {fileID: 4024885398200564506}
   m_Layer: 0
-  m_Name: DoorExitTrigger
+  m_Name: DoorOffTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8412625873989555864}
   m_Layer: 0
-  m_Name: DoorOffshootSpawn
+  m_Name: DoorExitSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 1586568882636867391}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 7.3902974, y: -1.175, z: 7.977523}
+  m_LocalPosition: {x: 5.6225305, y: -1.175, z: 6.209756}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6639,7 +6639,7 @@ Transform:
   m_GameObject: {fileID: 5970621996224317733}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: -2.7283995, y: -1.175, z: -2.480587}
+  m_LocalPosition: {x: -2.0212927, y: -1.175, z: -1.7734802}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8468,7 +8468,7 @@ GameObject:
   - component: {fileID: 2705488883860493686}
   - component: {fileID: 6015241894037920342}
   m_Layer: 0
-  m_Name: DoorOffshootTrigger
+  m_Name: DoorExitTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8591,7 +8591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5541234203254207101}
   m_Layer: 0
-  m_Name: doorexitspawn
+  m_Name: dooroffspawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8606,7 +8606,7 @@ Transform:
   m_GameObject: {fileID: 8615868141802278987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 10.499178, y: -1.175, z: 10.490255}
+  m_LocalPosition: {x: 12.090168, y: -1.175, z: 12.081245}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

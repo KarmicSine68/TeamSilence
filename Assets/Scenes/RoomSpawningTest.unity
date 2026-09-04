@@ -438,10 +438,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
   Room2DoorPrefabs:
-  - {fileID: 5428143056700996495, guid: d454a5a55318b9c46bf4de7187b353ab, type: 3}
-  - {fileID: 2396700755334306906, guid: 7ee5e0288aa59b34ebca7b83c1187037, type: 3}
+  - {fileID: 6438578845909452853, guid: 17e77977d0b1a1647bc8923e4edc1313, type: 3}
+  - {fileID: 7880701462977911151, guid: 07f8f9c80c891f046ba0c2112e30b114, type: 3}
+  - {fileID: 1956558964694485331, guid: 86b2100a578c4ed429799ce05cc7a795, type: 3}
+  - {fileID: 8770713907253943408, guid: 3c6443db0b97dcb4c8d13c21cdcfb08b, type: 3}
+  - {fileID: 755440929641591191, guid: 38189ee8d6d25ef4d96a5d987a05ee26, type: 3}
+  - {fileID: 1929730089892246859, guid: 629a05aeab60e154299be607202ea80b, type: 3}
+  - {fileID: 2371063962066423475, guid: 22f0622b574fe0248911e344bca0e9b2, type: 3}
+  - {fileID: 5537450390870195972, guid: 94789b1c1d57e7a4a87fa80ecb1cda5c, type: 3}
   Room3DoorPrefabs:
-  - {fileID: 5514761218125186136, guid: 12448e86475cb3145822f4f3d7ad5b43, type: 3}
+  - {fileID: 1240752113859369355, guid: 1745d2d62cb969943bada64acecbaf9a, type: 3}
   Room1DoorPrefabs:
   - {fileID: 1597791851021742195, guid: 195af7ec4d2d20d4b94f0489a0623ef4, type: 3}
   Rooms: []

@@ -6433,7 +6433,7 @@ Transform:
   m_GameObject: {fileID: 1136066269966774522}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.86523, y: 0, z: 0.11669016}
+  m_LocalPosition: {x: -14.115231, y: 0, z: 0.11669016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14060,7 +14060,7 @@ Transform:
   m_GameObject: {fileID: 2372523366286409396}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.13477, y: 0, z: 0.11669097}
+  m_LocalPosition: {x: 15.134769, y: 0, z: 0.11669097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55010,7 +55010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   RoomCost: 0
-  RotateAmount: 180
+  RotateAmount: 90
   DoorForward: {fileID: 8069840362202014225}
   DoorBackwards: {fileID: 6710481340169715583}
   DoorOffshoot: {fileID: 0}
