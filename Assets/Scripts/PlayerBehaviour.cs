@@ -40,6 +40,9 @@ public class PlayerBehaviour : PlayerInputHandler
     [Tooltip("How long a player is invincibile for when dashing.")]
     [SerializeField] float invincibilityTimeWhenDashing;
 
+    [SerializeField] TMPro.TMP_Text Health;
+    [SerializeField] TMPro.TMP_Text Dash;
+
     #region Input Stuff
     /// <summary>
     /// Sets initial components and input action variables
@@ -101,6 +104,10 @@ public class PlayerBehaviour : PlayerInputHandler
     }
     #endregion
 
+    private void Start()
+    {
+        updateUI();
+    }
     /// <summary>
     /// Moves the player
     /// </summary>
@@ -124,6 +131,7 @@ public class PlayerBehaviour : PlayerInputHandler
     {
         yield return new WaitForSeconds(dashCooldownTime);
         canDash = true;
+        updateUI();
         Debug.Log("Dash is ready.");
     }
 
@@ -135,6 +143,8 @@ public class PlayerBehaviour : PlayerInputHandler
         invincible = true;
         Debug.Log("I'M INVINCIBLE");
         //If player is stationary, dash to the right
+        canDash = false;
+        updateUI();
         if (rb.linearVelocity == Vector3.zero)
         {
             rb.AddForce(Vector3.right * dashForce * moveSpeed, ForceMode.Impulse);
@@ -158,7 +168,7 @@ public class PlayerBehaviour : PlayerInputHandler
             StartCoroutine(ITime(invinvibilityTimeWhenHit));
             currentHealth -= damage;
             TakeKnockback();
-
+            updateUI();
             if (currentHealth <= 0)
             {
                 Die();
@@ -178,7 +188,7 @@ public class PlayerBehaviour : PlayerInputHandler
             invincible = true;
             StartCoroutine(ITime(invinvibilityTimeWhenHit));
             currentHealth -= damage;
-
+            updateUI();
             if (currentHealth <= 0)
             {
                 Die();
@@ -223,5 +233,17 @@ public class PlayerBehaviour : PlayerInputHandler
         yield return new WaitForSeconds(time);
         Debug.Log("I'M MORTAL!!!");
         invincible = false;
+    }
+
+    void updateUI()
+    {
+        if(Health != null)
+        {
+            Health.text = "Health: " + currentHealth.ToString();
+        }
+        if(dash != null)
+        {
+            Dash.text = "Dash: " + canDash.ToString();
+        }
     }
 }
