@@ -12,6 +12,7 @@ public class DummyBehaviour : MonoBehaviour
 {
     [SerializeField] int maxHealth;
     int currentHealth;
+    EnemySpawner spawner;
 
    /// <summary>
    /// Sets dummy health to full
@@ -19,6 +20,11 @@ public class DummyBehaviour : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+    }
+
+    public void SetSpawnerReference(EnemySpawner spawnRef)
+    {
+        spawner = spawnRef;
     }
 
     /// <summary>
@@ -40,6 +46,7 @@ public class DummyBehaviour : MonoBehaviour
     /// </summary>
     void Die()
     {
+        spawner.RemoveEnemy();
         Destroy(this.gameObject);
     }
 }

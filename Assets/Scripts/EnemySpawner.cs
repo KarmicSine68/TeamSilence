@@ -22,29 +22,43 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<GameObject> spawnPoints = new List<GameObject>();
     [SerializeField] List<WaveData> enemySpawnPatterns = new List<WaveData>();
     [SerializeField] int testPoints;
+    [SerializeField] int testWaves;
     [Tooltip("This is so enemies don't just all spawn on top of each other.")]
     [SerializeField] float spawnDelay;
+    int waveIndex;
+    int totalWaves;
+    int totalPoints;
+    bool allEnemiesSpawned;
+
+    [SerializeField] int enemyCount;
 
     int pointsLeftForSpawning;
 
     [Button("Test Wave Index")]
     private void TestWaveIndex()
     {
-        StartCoroutine(SpawnWave(testPoints));
+        StartEncounter(testPoints, testWaves);
     }
 
-    private void Start()
+    [Button("Test kill enemies.")]
+    private void TestKillAllEnemies()
     {
-        GetWaveEnemyCount();
+        enemyCount = 0;
+        RemoveEnemy();
     }
 
-    void GetWaveEnemyCount()
+    public void StartEncounter(int roomPoints, int roomWaves)
     {
-
+        totalPoints = roomPoints;
+        totalWaves = roomWaves;
+        waveIndex = 0;
+        allEnemiesSpawned = false;
+        StartCoroutine(SpawnWave(roomPoints));
     }
 
     IEnumerator SpawnWave(int pointsForSpawning)
     {
+        testPoints = pointsForSpawning;
         for(int i = pointsForSpawning; i > 0;)
         {
             bool enemyFound = false;
@@ -70,7 +84,18 @@ public class EnemySpawner : MonoBehaviour
             {
                 int randomEnemyIndex = Random.Range(0, temp.enemyTypes.Count);
 
-                Instantiate(temp.enemyTypes[randomEnemyIndex], GetSpawnPoint(), Quaternion.identity);
+                GameObject enemy = Instantiate(temp.enemyTypes[randomEnemyIndex], GetSpawnPoint(), Quaternion.identity);
+
+                if(enemy.GetComponent<EnemyBehaviour>())
+                {
+                    enemy.GetComponent<EnemyBehaviour>().SetSpawnerReference(this);
+                }
+                else
+                {
+                    enemy.GetComponent<DummyBehaviour>().SetSpawnerReference(this);
+                }
+
+                ++enemyCount;
 
                 yield return new WaitForSeconds(spawnDelay);
             }
@@ -79,11 +104,24 @@ public class EnemySpawner : MonoBehaviour
             testPoints -= temp.pointCostToSpawn;
             Debug.Log("I have " + testPoints + "left!!");
         }
+
+        allEnemiesSpawned = true;
+        ++waveIndex;
     }
 
     Vector3 GetSpawnPoint()
     {
         int randomIndex = Random.Range(0, spawnPoints.Count);
         return spawnPoints[randomIndex].transform.position;
+    }
+
+    public void RemoveEnemy()
+    {
+        --enemyCount;
+
+        if(allEnemiesSpawned && enemyCount <= 0 && waveIndex < totalWaves)
+        {
+            StartCoroutine(SpawnWave(totalPoints));
+        }
     }
 }

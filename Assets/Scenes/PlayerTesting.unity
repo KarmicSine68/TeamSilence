@@ -171,7 +171,9 @@ MonoBehaviour:
     enemyCount: 10
     pointCostToSpawn: 3
   testPoints: 10
+  testWaves: 2
   spawnDelay: 0.2
+  waveDelay: 3
 --- !u!4 &181223147
 Transform:
   m_ObjectHideFlags: 0
