@@ -39,6 +39,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     Vector3 bulletDir;
 
+    EnemySpawner spawner;
+
     /// <summary>
     /// Sets variables and determines which state the enemy starts in
     /// </summary>
@@ -56,6 +58,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             MoveToPlayer();
         }
+    }
+
+    public void SetSpawnerReference(EnemySpawner spawnRef)
+    {
+        spawner = spawnRef;
     }
 
     /// <summary>
@@ -94,6 +101,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Die()
     {
+        spawner.RemoveEnemy();
         Destroy(this.gameObject);
     }
 
