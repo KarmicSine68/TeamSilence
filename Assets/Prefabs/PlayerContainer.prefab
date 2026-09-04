@@ -49,12 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
   moveSpeed: 7
-  dashCooldownTime: 2
+  dashCooldownTime: 1.5
   dashForce: 25
   maxHealth: 10
   knockbackForce: 20
   playerModel: {fileID: 3223459206470836935}
-  invinvibilityTimeWhenHit: 1
+  invinvibilityTimeWhenHit: 1.5
   invincibilityTimeWhenDashing: 0.6
 --- !u!114 &4029354588414262556
 MonoBehaviour:
