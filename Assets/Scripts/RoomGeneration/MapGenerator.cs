@@ -97,6 +97,7 @@ public class MapGenerator : MonoBehaviour
 
             //connect the doors between the rooms
             previousRoom.GetComponent<RoomData>().DoorForward.TeleportSpot = CurrentRoom.GetComponent<RoomData>().roomEntranceSpawn;
+            previousRoom.GetComponent<RoomData>().DoorForward.Room = CurrentRoom.GetComponent<RoomData>();
             CurrentRoom.GetComponent<RoomData>().DoorBackwards.TeleportSpot = previousRoom.GetComponent<RoomData>().roomBacktrackSpawn;
             previousRoom = CurrentRoom;
         }
