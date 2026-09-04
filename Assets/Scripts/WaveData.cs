@@ -2,7 +2,7 @@
  * Author: Brad Dixon
  * File Name: WaveData.cs
  * Creation Date: 9/3/2026
- * Last Modified: 9/3/2026
+ * Last Modified: 9/4/2026
  * Brief: Data class that stores information for each wave
  * External Resources: N/A
  * ***************************************************************************/

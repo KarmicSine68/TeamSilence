@@ -2,7 +2,7 @@
  * Author: Brad Dixon
  * File Name: DummyBehaviour.cs
  * Creation Date: 9/1/2026
- * Last Modified: 9/1/2026
+ * Last Modified: 9/4/2026
  * Brief: Testing script to test player damage
  * External Resources: N/A
  * ***************************************************************************/
@@ -22,6 +22,10 @@ public class DummyBehaviour : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    /// <summary>
+    /// Sets a reference to the specific spawner that spawned this dummy
+    /// </summary>
+    /// <param name="spawnRef"></param>
     public void SetSpawnerReference(EnemySpawner spawnRef)
     {
         spawner = spawnRef;
