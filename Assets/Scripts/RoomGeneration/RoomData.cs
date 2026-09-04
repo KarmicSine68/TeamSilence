@@ -13,6 +13,9 @@ public class RoomData : MonoBehaviour
     public GameObject roomEntranceSpawn;
     public GameObject roomBacktrackSpawn;
     public GameObject roomBacktrackOffshootSpawn;
+    public EnemySpawner RoomSpawner;
+    [SerializeField] private int Points;
+    [SerializeField] private int Waves;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,5 +29,10 @@ public class RoomData : MonoBehaviour
         
     }
 
+    public void StartEncounter()
+    {
+        if(RoomSpawner != null)
+            RoomSpawner.StartEncounter(Points, Waves);
+    }
 
 }
