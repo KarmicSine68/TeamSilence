@@ -52,6 +52,9 @@ public class MapGenerator : MonoBehaviour
                     Door TempDoor = CurrentRoom.GetComponent<RoomData>().DoorForward;
                     CurrentRoom.GetComponent<RoomData>().DoorForward = CurrentRoom.GetComponent<RoomData>().DoorBackwards;
                     CurrentRoom.GetComponent<RoomData>().DoorBackwards = TempDoor;
+                    GameObject TempSpawn = CurrentRoom.GetComponent<RoomData>().roomEntranceSpawn;
+                    CurrentRoom.GetComponent<RoomData>().roomEntranceSpawn = CurrentRoom.GetComponent<RoomData>().roomBacktrackSpawn;
+                    CurrentRoom.GetComponent<RoomData>().roomBacktrackSpawn = TempSpawn;
                     if (CurrentRoom.GetComponent<RoomData>().DoorOffshoot != null)
                     {
                         CurrentRoom.GetComponent<RoomData>().DoorOffshoot.left = !CurrentRoom.GetComponent<RoomData>().DoorOffshoot.left;
