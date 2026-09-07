@@ -129,6 +129,8 @@ public class EnemyBehaviour : MonoBehaviour
             //Move to player
             rb.linearVelocity = dir.normalized * moveSpeed;
 
+            transform.LookAt(playerRef.transform);
+
             yield return new WaitForSeconds(.1f);
         }
 
@@ -151,6 +153,7 @@ public class EnemyBehaviour : MonoBehaviour
     /// <returns></returns>
     IEnumerator AttackDelay()
     {
+        transform.LookAt(playerRef.transform);
         //Visual to show that the enemy is going to attack
         Color originalColor = enemyMaterial.color;
         enemyMaterial.color = attackColor;
