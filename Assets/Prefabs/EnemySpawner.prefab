@@ -70,5 +70,5 @@ MonoBehaviour:
   - {fileID: 0}
   testPoints: 10
   testWaves: 2
-  spawnDelay: 0.2
+  spawnDelay: 0.6
   enemyCount: 0

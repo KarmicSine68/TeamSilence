@@ -4,6 +4,7 @@ public class Door : MonoBehaviour
 {
     public GameObject TeleportSpot;
     public bool left;
+    public RoomData Room;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,6 +28,10 @@ public class Door : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("Player"))
         {
+            if(Room != null)
+            {
+                Room.StartEncounter();
+            }
             other.gameObject.transform.position = TeleportSpot.transform.position;
         }
     }
