@@ -343,13 +343,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407796874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11386465, y: 0.86742806, z: -0.23242669, w: 0.4249486}
-  m_LocalPosition: {x: -7, y: 5, z: 7}
+  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: -0.29883623, w: 0.64085644}
+  m_LocalPosition: {x: -6.5, y: 11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 127.8, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 90, z: 0}
 --- !u!114 &407796878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0b1b29b58a6054a821464df7d7f6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowingCamera
-  cameraOffset: {x: -7, y: 5, z: 7}
+  cameraOffset: {x: -7, y: 11, z: 0}
   roomDimensions: {x: 0, y: 0}
 --- !u!1 &1087815166
 GameObject:
