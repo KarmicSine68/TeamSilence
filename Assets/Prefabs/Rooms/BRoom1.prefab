@@ -485,7 +485,7 @@ MonoBehaviour:
   roomBacktrackSpawn: {fileID: 1586568882636867391}
   roomBacktrackOffshootSpawn: {fileID: 8615868141802278987}
   RoomSpawner: {fileID: 8691126956988734997}
-  Points: 10
+  Points: 1
   Waves: 2
 --- !u!1 &1557879912554799591
 GameObject:
