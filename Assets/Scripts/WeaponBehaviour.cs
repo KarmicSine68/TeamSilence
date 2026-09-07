@@ -97,6 +97,7 @@ public class WeaponBehaviour : PlayerInputHandler
         bulletTrajectory = bulletTrajectory.normalized;
         //Debug.Log(bulletTrajectory);
         NormalizeDirection();
+        playerRef.transform.LookAt(Camera.main.ScreenToWorldPoint(worldPos));
 
         if(pressingAttack && canAttack)
         {
