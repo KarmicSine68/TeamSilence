@@ -11,10 +11,13 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject WinText;
 
+    public int RoomAmt;
+    public int AlcoveRms;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BuildLevel(10, 5);
+        BuildLevel(RoomAmt, AlcoveRms);
     }
 
     // Update is called once per frame
