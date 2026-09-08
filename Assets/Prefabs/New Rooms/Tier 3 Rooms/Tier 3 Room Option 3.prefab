@@ -79636,7 +79636,7 @@ GameObject:
   - component: {fileID: 2567055319871429349}
   - component: {fileID: 6992975755430473938}
   m_Layer: 0
-  m_Name: Tier 2 Room Option 3
+  m_Name: Tier 3 Room Option 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

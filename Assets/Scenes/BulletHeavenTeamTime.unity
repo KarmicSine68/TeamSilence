@@ -716,6 +716,12 @@ MonoBehaviour:
   - {fileID: 6438578845909452853, guid: 876cf3a47352c7841a7a4086b62222bc, type: 3}
   - {fileID: 6438578845909452853, guid: af7513966ef087340b3dd49c5af9123b, type: 3}
   - {fileID: 6438578845909452853, guid: 43ad60f70c61ae649b83ceb4eb79fbd9, type: 3}
+  - {fileID: 6438578845909452853, guid: 5ab2f11567c2bbf4f94d7b0dcc2b5d2b, type: 3}
+  - {fileID: 6438578845909452853, guid: 42d49f8657e0f7740baac7881624fddb, type: 3}
+  - {fileID: 6438578845909452853, guid: fbd85af354d934947a88a81710e2ab6d, type: 3}
+  - {fileID: 6438578845909452853, guid: 4515feb318a292a4f82c2918fa5ff044, type: 3}
+  - {fileID: 6438578845909452853, guid: 7e61cae9505d0d941a22894e69f5576e, type: 3}
+  - {fileID: 6438578845909452853, guid: 3fe2ab466da6778449fac1540e4c2136, type: 3}
   Room3DoorPrefabs:
   - {fileID: 1240752113859369355, guid: 1745d2d62cb969943bada64acecbaf9a, type: 3}
   Room1DoorPrefabs:
@@ -723,8 +729,9 @@ MonoBehaviour:
   Rooms: []
   StartingRoom: {fileID: 1597791851021742195, guid: 49bd424fe82962d40af4f5122407acb8, type: 3}
   WinText: {fileID: 307645233}
-  RoomAmt: 0
+  RoomAmt: 10
   AlcoveRms: 0
+  spawnDistance: 800
 --- !u!4 &1406846220
 Transform:
   m_ObjectHideFlags: 0
