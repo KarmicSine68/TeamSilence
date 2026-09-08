@@ -723,6 +723,8 @@ MonoBehaviour:
   Rooms: []
   StartingRoom: {fileID: 1597791851021742195, guid: 49bd424fe82962d40af4f5122407acb8, type: 3}
   WinText: {fileID: 307645233}
+  RoomAmt: 0
+  AlcoveRms: 0
 --- !u!4 &1406846220
 Transform:
   m_ObjectHideFlags: 0
