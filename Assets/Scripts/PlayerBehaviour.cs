@@ -11,6 +11,9 @@ using UnityEngine.InputSystem;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
+using System.Net.NetworkInformation;
 
 public class PlayerBehaviour : PlayerInputHandler
 {
@@ -24,6 +27,9 @@ public class PlayerBehaviour : PlayerInputHandler
     bool canDash;
     [Tooltip("How far the player dashes.")]
     [SerializeField] float dashForce;
+
+    [Tooltip("How strong gravity acts upon the player")]
+    [SerializeField] float gravityForce;
 
     [SerializeField] int maxHealth;
     int currentHealth;
@@ -106,6 +112,8 @@ public class PlayerBehaviour : PlayerInputHandler
 
     private void Start()
     {
+        //Applies a new permanent gravity modifier to this player/rb
+        Physics.gravity = new Vector3(0, -gravityForce, 0);
         updateUI();
     }
     /// <summary>
@@ -120,7 +128,9 @@ public class PlayerBehaviour : PlayerInputHandler
             rb.linearVelocity = (xMove + zMove) * moveSpeed;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
-            rb.linearVelocity = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0) * rb.linearVelocity;
+            //Original Code
+            //rb.linearVelocity = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0) * rb.linearVelocity;
+            //transform.rotation = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0) * rb.linearVelocity;
         }
         else
         {
@@ -206,10 +216,13 @@ public class PlayerBehaviour : PlayerInputHandler
     /// <summary>
     /// When the player's health reaches 0
     /// </summary>
+    /// 
+    [Button("Player Death")]
     void Die()
     {
         alive = false;
         playerModel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>

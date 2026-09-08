@@ -51,6 +51,7 @@ MonoBehaviour:
   moveSpeed: 7
   dashCooldownTime: 1.5
   dashForce: 25
+  gravityForce: 0
   maxHealth: 10
   knockbackForce: 20
   playerModel: {fileID: 3223459206470836935}
