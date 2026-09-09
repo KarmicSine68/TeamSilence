@@ -79767,11 +79767,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomData
   RoomCost: 0
   RotateAmount: 90
-  DoorForward: {fileID: 5428017300432762577}
-  DoorBackwards: {fileID: 4231129715310348826}
+  DoorForward: {fileID: 4231129715310348826}
+  DoorBackwards: {fileID: 5428017300432762577}
   DoorOffshoot: {fileID: 0}
-  roomEntranceSpawn: {fileID: 4324205081156160345}
-  roomBacktrackSpawn: {fileID: 975449382023745841}
+  roomEntranceSpawn: {fileID: 975449382023745841}
+  roomBacktrackSpawn: {fileID: 4324205081156160345}
   roomBacktrackOffshootSpawn: {fileID: 0}
   RoomSpawner: {fileID: 6198821243198522338}
   Points: 1
