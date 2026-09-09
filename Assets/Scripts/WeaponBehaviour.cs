@@ -38,7 +38,6 @@ public class WeaponBehaviour : PlayerInputHandler
         base.Awake();
         playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
         mainCam = Camera.main.GetComponent<FollowingCamera>();
-        _camRotation = mainCam.transform.eulerAngles.y;
         _camDistance = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
         canAttack = true;
     }
@@ -97,20 +96,6 @@ public class WeaponBehaviour : PlayerInputHandler
         LookingDirection();
         RotatePlayer();
 
-
-        //aimTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
-        //    playerRef.transform.position.y);
-
-        //aimTrajectory.z -= playerRef.transform.position.z;
-        //aimTrajectory = aimTrajectory.normalized;
-
-
-
-        //bulletTrajectory.z -= playerRef.transform.position.z;
-        //bulletTrajectory = bulletTrajectory.normalized;
-        //Debug.Log(bulletTrajectory);
-        //NormalizeDirection();
-
         if (pressingAttack && canAttack)
         {
             AttackWithWeapon();
@@ -134,10 +119,6 @@ public class WeaponBehaviour : PlayerInputHandler
     void RotatePlayer() 
     {
         Vector3 lookAtEuler = Quaternion.LookRotation(lookAtDirection).eulerAngles;
-
-        //Ensure no unwanted rotations & account for existing camera rotation
-        //lookAtEuler.x = lookAtEuler.z = 0;
-        lookAtEuler.y -= _camRotation;
 
         playerRef.transform.eulerAngles = lookAtEuler;
     }

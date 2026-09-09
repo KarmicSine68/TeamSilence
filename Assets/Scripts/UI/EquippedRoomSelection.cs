@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,11 +16,18 @@ public class EquippedRoomSelection : MonoBehaviour, IPointerClickHandler
     private RoomSelectManager roomSelectManager;
     private Image imgComp;
 
+    
+
     private void Awake()
     {
         roomSelectManager = FindAnyObjectByType<RoomSelectManager>();
         imgComp = GetComponent<Image>();
         imgComp.sprite = null;
+    }
+
+    public void Init(int id = -1)
+    {
+        this.id = id;
     }
     public void EquipRoom(RoomSelectManager.RoomType type)
     {
@@ -45,4 +53,6 @@ public class EquippedRoomSelection : MonoBehaviour, IPointerClickHandler
             EquipRoom(RoomSelectManager.RoomType.None);
         }
     }
+
+
 }
