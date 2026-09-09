@@ -343,13 +343,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407796874}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: -0.29883623, w: 0.64085644}
-  m_LocalPosition: {x: -7, y: 11, z: 0}
+  m_LocalRotation: {x: 0.40557975, y: 0.579228, z: -0.40557975, w: 0.579228}
+  m_LocalPosition: {x: -4.29, y: 14.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 90, z: 0}
 --- !u!114 &407796878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f0b1b29b58a6054a821464df7d7f6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowingCamera
-  cameraOffset: {x: -7, y: 11, z: 0}
+  cameraOffset: {x: -4.29, y: 14.86, z: 0}
   roomDimensions: {x: 0, y: 0}
 --- !u!1 &1087815166
 GameObject:
@@ -716,6 +716,12 @@ MonoBehaviour:
   - {fileID: 6438578845909452853, guid: 876cf3a47352c7841a7a4086b62222bc, type: 3}
   - {fileID: 6438578845909452853, guid: af7513966ef087340b3dd49c5af9123b, type: 3}
   - {fileID: 6438578845909452853, guid: 43ad60f70c61ae649b83ceb4eb79fbd9, type: 3}
+  - {fileID: 6438578845909452853, guid: 5ab2f11567c2bbf4f94d7b0dcc2b5d2b, type: 3}
+  - {fileID: 6438578845909452853, guid: 42d49f8657e0f7740baac7881624fddb, type: 3}
+  - {fileID: 6438578845909452853, guid: fbd85af354d934947a88a81710e2ab6d, type: 3}
+  - {fileID: 6438578845909452853, guid: 4515feb318a292a4f82c2918fa5ff044, type: 3}
+  - {fileID: 6438578845909452853, guid: 7e61cae9505d0d941a22894e69f5576e, type: 3}
+  - {fileID: 6438578845909452853, guid: 3fe2ab466da6778449fac1540e4c2136, type: 3}
   Room3DoorPrefabs:
   - {fileID: 1240752113859369355, guid: 1745d2d62cb969943bada64acecbaf9a, type: 3}
   Room1DoorPrefabs:
@@ -723,8 +729,9 @@ MonoBehaviour:
   Rooms: []
   StartingRoom: {fileID: 1597791851021742195, guid: 49bd424fe82962d40af4f5122407acb8, type: 3}
   WinText: {fileID: 307645233}
-  RoomAmt: 0
+  RoomAmt: 6
   AlcoveRms: 0
+  spawnDistance: 800
 --- !u!4 &1406846220
 Transform:
   m_ObjectHideFlags: 0
@@ -940,6 +947,10 @@ PrefabInstance:
       propertyPath: Health
       value: 
       objectReference: {fileID: 1087815168}
+    - target: {fileID: 956766307435515101, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      propertyPath: moveSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1653995301054526514, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_Name
       value: PlayerContainer

@@ -13,6 +13,7 @@ public class MapGenerator : MonoBehaviour
 
     public int RoomAmt;
     public int AlcoveRms;
+    [SerializeField] private int spawnDistance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -78,7 +79,7 @@ public class MapGenerator : MonoBehaviour
             else
             {
                 //spawn in a room out of the rooms we have that has 2 doors
-                CurrentRoom = Instantiate(Room2DoorPrefabs[Random.Range(0, Room2DoorPrefabs.Length)], new Vector3(100*i + 100,0), Quaternion.identity);
+                CurrentRoom = Instantiate(Room2DoorPrefabs[Random.Range(0, Room2DoorPrefabs.Length)], new Vector3(spawnDistance*i + spawnDistance,0), Quaternion.identity);
                 Rooms.Add(CurrentRoom);
                 //rotate if the room needs to face the other way to have it fit in with the walking through a door
                 if (!previousRoom.GetComponent<RoomData>().DoorForward.left)
