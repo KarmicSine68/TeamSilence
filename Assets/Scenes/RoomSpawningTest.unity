@@ -944,6 +944,10 @@ PrefabInstance:
       propertyPath: Health
       value: 
       objectReference: {fileID: 1087815168}
+    - target: {fileID: 956766307435515101, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      propertyPath: gravityForce
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1653995301054526514, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_Name
       value: PlayerContainer
@@ -951,6 +955,10 @@ PrefabInstance:
     - target: {fileID: 1653995301054526514, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3124971317179581620, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3124971317179581620, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: bulletDeviation
@@ -1001,8 +1009,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7032399863964550624, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7032399863964550624, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
       propertyPath: m_Constraints
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

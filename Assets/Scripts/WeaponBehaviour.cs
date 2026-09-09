@@ -15,15 +15,20 @@ public class WeaponBehaviour : PlayerInputHandler
 {
     GameObject playerRef;
     FollowingCamera mainCam;
+    float _camRotation;
+    float _camDistance;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float bulletSpeed;
     [SerializeField] float attackCooldown;
     bool canAttack;
     bool pressingAttack;
     [SerializeField] int baseDamage;
-    Vector3 bulletTrajectory;
+    Vector3 aimTrajectory;
     [Tooltip("The percentage in which the bullets should deviate by in their trajectory")]
     [SerializeField] float bulletDeviation;
+
+
+    Vector3 lookAtDirection;
 
     /// <summary>
     /// Gets references to other game objects
@@ -31,8 +36,10 @@ public class WeaponBehaviour : PlayerInputHandler
     override protected void Awake()
     {
         base.Awake();
-        mainCam = Camera.main.GetComponent<FollowingCamera>();
         playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
+        mainCam = Camera.main.GetComponent<FollowingCamera>();
+        _camRotation = mainCam.transform.eulerAngles.y;
+        _camDistance = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
         canAttack = true;
     }
 
@@ -87,22 +94,52 @@ public class WeaponBehaviour : PlayerInputHandler
     /// </summary>
     protected void FixedUpdate()
     {
-        float camDistanceFromPlayer = Vector3.Distance(Camera.main.transform.position, playerRef.transform.position);
-        Vector3 worldPos = aim.ReadValue<Vector2>();
-        worldPos.z = Mathf.Abs(camDistanceFromPlayer);
-        bulletTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
-            playerRef.transform.position.y);
+        LookingDirection();
+        RotatePlayer();
 
-        bulletTrajectory.z -= playerRef.transform.position.z;
-        bulletTrajectory = bulletTrajectory.normalized;
+
+        //aimTrajectory = Camera.main.ScreenToWorldPoint(worldPos) - new Vector3(playerRef.transform.position.x,
+        //    playerRef.transform.position.y);
+
+        //aimTrajectory.z -= playerRef.transform.position.z;
+        //aimTrajectory = aimTrajectory.normalized;
+
+
+
+        //bulletTrajectory.z -= playerRef.transform.position.z;
+        //bulletTrajectory = bulletTrajectory.normalized;
         //Debug.Log(bulletTrajectory);
-        NormalizeDirection();
-        playerRef.transform.LookAt(Camera.main.ScreenToWorldPoint(worldPos));
+        //NormalizeDirection();
 
-        if(pressingAttack && canAttack)
+        if (pressingAttack && canAttack)
         {
             AttackWithWeapon();
         }
+    }
+
+    /// <summary>
+    /// Calculate direction the player should be facing based on position of the mouse
+    /// for rotation and bullet accuracy purposes
+    /// </summary>
+    void LookingDirection() 
+    {
+        Vector3 screenPosition = new(aim.ReadValue<Vector2>().x, aim.ReadValue<Vector2>().y, _camDistance);
+
+        lookAtDirection = Vector3.Scale(Camera.main.ScreenToWorldPoint(screenPosition) - playerRef.transform.position, new Vector3(1, 0, 1));
+    }
+
+    /// <summary>
+    /// Rotate the forwards of the player to face direction of pointer while taking into account the camera rotation
+    /// </summary>
+    void RotatePlayer() 
+    {
+        Vector3 lookAtEuler = Quaternion.LookRotation(lookAtDirection).eulerAngles;
+
+        //Ensure no unwanted rotations & account for existing camera rotation
+        //lookAtEuler.x = lookAtEuler.z = 0;
+        lookAtEuler.y -= _camRotation;
+
+        playerRef.transform.eulerAngles = lookAtEuler;
     }
 
     /// <summary>
@@ -110,17 +147,17 @@ public class WeaponBehaviour : PlayerInputHandler
     /// </summary>
     void NormalizeDirection()
     {
-        bulletTrajectory.y = 0;
-        if (Mathf.Abs(bulletTrajectory.z) <= .8f) //Using .8 because the z tends to be an accurate metric up to this number
+        aimTrajectory.y = 0;
+        if (Mathf.Abs(aimTrajectory.z) <= .8f) //Using .8 because the z tends to be an accurate metric up to this number
         {
-            int negativeValue = bulletTrajectory.x < 0 ? -1 : 1;
-            bulletTrajectory.x = (1 - Mathf.Abs(bulletTrajectory.z)) * negativeValue;
+            int negativeValue = aimTrajectory.x < 0 ? -1 : 1;
+            aimTrajectory.x = (1 - Mathf.Abs(aimTrajectory.z)) * negativeValue;
             //Debug.Log(bulletTrajectory);
         }
         else
         {
-            int negativeValue = bulletTrajectory.z < 0 ? -1 : 1;
-            bulletTrajectory.z = (1 - Mathf.Abs(bulletTrajectory.x)) * negativeValue;
+            int negativeValue = aimTrajectory.z < 0 ? -1 : 1;
+            aimTrajectory.z = (1 - Mathf.Abs(aimTrajectory.x)) * negativeValue;
             //Debug.Log(bulletTrajectory);
         }
     }
@@ -136,8 +173,8 @@ public class WeaponBehaviour : PlayerInputHandler
             bulletDeviation /= 100f;
         }
 
-        bulletTrajectory.x += Random.Range(-bulletDeviation, bulletDeviation);
-        bulletTrajectory.z += Random.Range(-bulletDeviation, bulletDeviation);
+        aimTrajectory.x += Random.Range(-bulletDeviation, bulletDeviation);
+        aimTrajectory.z += Random.Range(-bulletDeviation, bulletDeviation);
     }
 
     /// <summary>
@@ -146,11 +183,10 @@ public class WeaponBehaviour : PlayerInputHandler
     virtual protected void AttackWithWeapon()
     {
         GameObject bulletTemp = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bulletTemp.GetComponent<ProjectileBehaviour>().ProjectileDamage = baseDamage;
+        bulletTemp.GetComponent<ProjectileBehaviour>().Init(baseDamage, lookAtDirection.normalized * bulletSpeed);
 
         AddDeviation();
 
-        bulletTemp.GetComponent<Rigidbody>().linearVelocity = bulletTrajectory * bulletSpeed;
         canAttack = false;
         StartCoroutine(AttackCooldown());
     }

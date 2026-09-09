@@ -51,8 +51,11 @@ public class ProjectileBehaviour : MonoBehaviour
     /// <summary>
     /// Starts the timer for how long bullets should be alive
     /// </summary>
-    private void Start()
+    public void Init(int projectileDmg, Vector3 bulletVel)
     {
+        projectileDamage = projectileDmg;
+        GetComponent<Rigidbody>().linearVelocity = bulletVel;
+        transform.rotation = Quaternion.LookRotation(bulletVel);
         StartCoroutine(ProjectileLifeTime());
     }
 
