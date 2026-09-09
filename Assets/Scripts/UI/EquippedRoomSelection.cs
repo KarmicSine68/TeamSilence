@@ -21,6 +21,11 @@ public class EquippedRoomSelection : MonoBehaviour, IPointerClickHandler
         imgComp = GetComponent<Image>();
         imgComp.sprite = null;
     }
+
+    public void Init(int id = -1)
+    {
+        this.id = id;
+    }
     public void EquipRoom(RoomSelectManager.RoomType type)
     {
         heldType = type;

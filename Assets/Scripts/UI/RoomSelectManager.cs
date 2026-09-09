@@ -1,6 +1,9 @@
 using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomSelectManager : MonoBehaviour
 {
@@ -11,6 +14,9 @@ public class RoomSelectManager : MonoBehaviour
         Tier2,
         Tier3
     }
+    [SerializeField]
+    private Button generateBtn;
+
     [SerializeField, Header("Prefabs"), HorizontalLine(4, EColor.Blue)]
     private HeldRoom HeldRoomPrefab;
     private HeldRoom heldRoom;
@@ -39,8 +45,25 @@ public class RoomSelectManager : MonoBehaviour
     [Header("Room Colors"), HorizontalLine(4, EColor.Red)]
     public List<Color> RoomColors = new List<Color>(3);
 
+    [Header("Cost"), HorizontalLine(4, EColor.Indigo), SerializeField]
+    private TMP_Text costText;
+
+    [SerializeField]
+    private List<int> tierCosts;
+
+    [SerializeField]
+    private int startingCurrency;
+
+    [HideInInspector]
+    public int currentCurrency;
+
+    
+
     private void Awake()
     {
+        currentCurrency = startingCurrency;
+        SetGenerateBtnSelectability();
+        UpdateCostUI();
         SetUpRooms();
     }
 
@@ -62,7 +85,26 @@ public class RoomSelectManager : MonoBehaviour
 
     public void SetRoom(int id, RoomType type)
     {
+        //clearing a room
+        if (type == RoomType.None && Rooms[id] != RoomType.None)
+        {
+            currentCurrency += tierCosts[(int)Rooms[id] - 1];
+        }
+        else
+        {
+            //setting a room
+            if (type != RoomType.None)
+            {
+                currentCurrency -= tierCosts[(int)type - 1];
+            }
+            
+        }
+
         Rooms[id] = type;
+
+
+        SetGenerateBtnSelectability();
+        UpdateCostUI();
     }
 
     public void SetUpRooms()
@@ -72,6 +114,7 @@ public class RoomSelectManager : MonoBehaviour
         {
             Rooms.Add(RoomType.None);
             EquippedRoomSelection tempRm = Instantiate(roomPrefab, equippedRoomContainer.transform);
+            tempRm.Init(i);
             equippedRoomButtons.Add(tempRm);
         }
 
@@ -81,6 +124,24 @@ public class RoomSelectManager : MonoBehaviour
             AvailableRoomButton tempRm = Instantiate(roomButtonPrefab, AvailableButtonContainer.transform);
             availableButtons.Add(tempRm);
             tempRm.Init((RoomType)i + 1);
+        }
+    }
+
+    private void UpdateCostUI()
+    {
+        costText.text = $"Currency: {currentCurrency}";
+    }
+
+    private void SetGenerateBtnSelectability()
+    {
+        generateBtn.interactable = Rooms.Contains(RoomType.None);
+    }
+
+    public void ClearAllRooms()
+    {
+        for (int i = 0; i < equippedRoomButtons.Count; i++)
+        {
+            equippedRoomButtons[i].EquipRoom(RoomType.None);
         }
     }
 }
