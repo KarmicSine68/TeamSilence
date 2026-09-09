@@ -49,22 +49,24 @@ public class RoomSelectManager : MonoBehaviour
     private TMP_Text costText;
 
     [SerializeField]
-    private List<int> tierCosts;
+    public List<int> tierCosts;
 
     [SerializeField]
     private int startingCurrency;
 
     [HideInInspector]
     public int currentCurrency;
+    public static Action<int> currencyUpdated;
 
-    
 
     private void Awake()
     {
         currentCurrency = startingCurrency;
-        SetGenerateBtnSelectability();
-        UpdateCostUI();
+
+        
         SetUpRooms();
+        UpdateCostUI();
+        SetGenerateBtnSelectability();
     }
 
     public void SelectRoom(RoomType type, Vector3 position = new())
@@ -85,7 +87,17 @@ public class RoomSelectManager : MonoBehaviour
 
     public void SetRoom(int id, RoomType type)
     {
-        //clearing a room
+        if (Rooms[id] != RoomType.None)
+        {
+            currentCurrency += tierCosts[(int)Rooms[id] - 1];
+        }
+
+        if (type != RoomType.None)
+        {
+            currentCurrency -= tierCosts[(int)type - 1];
+        }
+
+        /*//clearing a room
         if (type == RoomType.None && Rooms[id] != RoomType.None)
         {
             currentCurrency += tierCosts[(int)Rooms[id] - 1];
@@ -98,7 +110,7 @@ public class RoomSelectManager : MonoBehaviour
                 currentCurrency -= tierCosts[(int)type - 1];
             }
             
-        }
+        }*/
 
         Rooms[id] = type;
 
@@ -129,12 +141,13 @@ public class RoomSelectManager : MonoBehaviour
 
     private void UpdateCostUI()
     {
+        currencyUpdated?.Invoke(currentCurrency);
         costText.text = $"Currency: {currentCurrency}";
     }
 
     private void SetGenerateBtnSelectability()
     {
-        generateBtn.interactable = Rooms.Contains(RoomType.None);
+        generateBtn.interactable = !Rooms.Contains(RoomType.None);
     }
 
     public void ClearAllRooms()
