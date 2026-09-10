@@ -122,10 +122,10 @@ public class PlayerBehaviour : PlayerInputHandler
     {
         if (alive)
         {
-            Vector3 xMove = move.ReadValue<Vector2>().x * Camera.main.transform.right;
-            Vector3 zMove = move.ReadValue<Vector2>().y * Camera.main.transform.forward;
-            rb.linearVelocity = (xMove + zMove) * moveSpeed;
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
+            float xMove = move.ReadValue<Vector2>().x;
+            float zMove = move.ReadValue<Vector2>().y;
+            Vector3 playerVelocity = new(xMove, 0, zMove);
+            rb.linearVelocity = playerVelocity * moveSpeed;
 
             //Original Code
             //rb.linearVelocity = Quaternion.Euler(0, Camera.main.transform.rotation.y, 0) * rb.linearVelocity;
