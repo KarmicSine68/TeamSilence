@@ -8,6 +8,10 @@
  * ***************************************************************************/
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine.UI;
+using System.Linq;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -18,6 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] int maxHealth;
     int currentHealth;
+    bool isAggro;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float minRunTime;
@@ -37,7 +42,26 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] int burstCount;
     [SerializeField] float burstDelay;
 
+    [Header("Childed Variables/Objects")]
+
+    [SerializeField] private MultiColliderChildTrigger playerSearchTrigger;
+    [SerializeField] private MultiColliderChildTrigger warnOthersTrigger;
+
+    [SerializeField] private Image aggroIndicator;
+    [SerializeField] private Color neutralColor, aggroColor;
+
+    [SerializeField]
+    private List<EnemyBehaviour> nearbyAllies;
+
     Vector3 bulletDir;
+
+    private void OnEnable()
+    {
+        playerSearchTrigger.triggerEnter += OnPlayerLocate;
+        playerSearchTrigger.triggerExit += OnPlayerLost;
+        warnOthersTrigger.triggerEnter += OnAllyNearby;
+        warnOthersTrigger.triggerExit += OnAllyDistant;
+    }
 
     EnemySpawner spawner;
 
@@ -46,18 +70,20 @@ public class EnemyBehaviour : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        nearbyAllies = new List<EnemyBehaviour>();
         rb = GetComponent<Rigidbody>();
         playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
         enemyMaterial = GetComponentInChildren<MeshRenderer>().material;
         currentHealth = maxHealth;
-        if(playerInRange)
-        {
-            AttackPlayer();
-        }
-        else
-        {
-            MoveToPlayer();
-        }
+        aggroIndicator.color = neutralColor;
+        //if(playerInRange)
+        //{
+        //    AttackPlayer();
+        //}
+        //else
+        //{
+        //    MoveToPlayer();
+        //}
     }
 
     public void SetSpawnerReference(EnemySpawner spawnRef)
@@ -65,28 +91,70 @@ public class EnemyBehaviour : MonoBehaviour
         spawner = spawnRef;
     }
 
+
     /// <summary>
     /// Tells the enemy player is in range
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerEnter(Collider other)
+    private void OnPlayerLocate(Collider other) 
     {
-        if(other.GetComponentInParent<PlayerBehaviour>())
+        if (other.GetComponentInParent<PlayerBehaviour>()) 
         {
-            playerInRange = true;
+            if (playerInRange)
+                return;
+
+            playerInRange = isAggro = true;
+            aggroIndicator.color = aggroColor;
+            AttackPlayer();
         }
     }
 
-    /// <summary>
-    /// Tells the enemy the player is no longer in range
-    /// </summary>
-    /// <param name="other"></param>
-    private void OnTriggerExit(Collider other)
+    private void OnPlayerLost(Collider other) 
     {
-        if (other.GetComponentInParent<PlayerBehaviour>())
+        if (other.GetComponentInParent<PlayerBehaviour>()) 
         {
             playerInRange = false;
         }
+    }
+
+    private void OnAllyNearby(Collider other) 
+    {
+        EnemyBehaviour col = other.GetComponentInParent<EnemyBehaviour>();
+        if (col != null) 
+        {
+            if (nearbyAllies.IndexOf(col) <= -1) 
+            {
+                nearbyAllies.Add(col);
+            }
+        }
+    }
+
+    private void OnAllyDistant(Collider other) 
+    {
+        EnemyBehaviour col = other.GetComponentInParent<EnemyBehaviour>();
+        if (col != null)
+        {
+            nearbyAllies.Remove(col);
+        }
+    }
+
+    public void BecomeAggro() 
+    {
+        if (isAggro)
+            return;
+        isAggro = true;
+        aggroIndicator.color = aggroColor;
+        MoveToPlayer();
+    }
+
+    public void AggroAllies()
+    {
+        foreach (var ally in nearbyAllies)
+        {
+            ally.BecomeAggro();
+        }
+        
+        nearbyAllies.Clear();
     }
 
     public void TakeDamage(int damage)
@@ -97,6 +165,13 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Die();
         }
+
+        if (!isAggro) 
+        {
+            BecomeAggro();
+            AggroAllies();
+        }
+
     }
 
     void Die()
@@ -144,14 +219,14 @@ public class EnemyBehaviour : MonoBehaviour
     void AttackPlayer()
     {
         rb.linearVelocity = Vector3.zero;
-        StartCoroutine(AttackDelay());
+        StartCoroutine(AttackProcess());
     }
 
     /// <summary>
     /// Enemy waits x amount of time before starting their attack
     /// </summary>
     /// <returns></returns>
-    IEnumerator AttackDelay()
+    IEnumerator AttackProcess()
     {
         transform.LookAt(playerRef.transform);
         //Visual to show that the enemy is going to attack
@@ -168,9 +243,15 @@ public class EnemyBehaviour : MonoBehaviour
             SpawnCone();
             yield return new WaitForSeconds(burstDelay);
         }
-
-        //Enter next state
-        RandomlyRun();
+        //Aggro'd, now seeks out player if they left or continues to attack
+        if (playerInRange)
+        {
+            AttackPlayer();
+        }
+        else
+        {
+            MoveToPlayer();
+        }
     }
 
     /// <summary>
