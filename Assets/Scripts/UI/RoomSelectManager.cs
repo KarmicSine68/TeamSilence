@@ -59,6 +59,13 @@ public class RoomSelectManager : MonoBehaviour
     public static Action<int> currencyUpdated;
     public static Action<List<RoomType>> RoomTypesSelected;
 
+    [SerializeField]
+    private GameObject InSceneUI;
+    [SerializeField]
+    private TMP_Text health;
+    [SerializeField]
+    private TMP_Text dash;
+
     private void Awake()
     {
         currentCurrency = startingCurrency;
@@ -161,6 +168,20 @@ public class RoomSelectManager : MonoBehaviour
     public void StartRun()
     {
         RoomTypesSelected?.Invoke(Rooms);
+        
+    }
+
+    public TMP_Text[] ReturnPlayerUI()
+    {
+        InSceneUI.SetActive(true);
+
+        TMP_Text[] uiElements = new TMP_Text[2];
+
+        uiElements[0] = health;
+        uiElements[1] = dash;
+
         gameObject.SetActive(false);
+
+        return uiElements;
     }
 }
