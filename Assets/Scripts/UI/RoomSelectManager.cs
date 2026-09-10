@@ -161,5 +161,6 @@ public class RoomSelectManager : MonoBehaviour
     public void StartRun()
     {
         RoomTypesSelected?.Invoke(Rooms);
+        gameObject.SetActive(false);
     }
 }

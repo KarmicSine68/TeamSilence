@@ -19,6 +19,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField]
     private List<GameObject> availableRooms = new List<GameObject>();
 
+    [SerializeField]
+    private GameObject BossRoom;
+
+    [SerializeField]
+    private PlayerBehaviour playerPrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,6 +73,8 @@ public class MapGenerator : MonoBehaviour
 
             availableRooms.Add(roomprefab);
         }
+
+        BuildLevel(RoomAmt, AlcoveRms);
     }
 
     private GameObject GetRandomRoomFromType(RoomSelectManager.RoomType type)
@@ -106,10 +114,11 @@ public class MapGenerator : MonoBehaviour
         //Spawns in the first starting room and gives that data to previous room to make sure the rooms can start being linked
         GameObject previousRoom = Instantiate(StartingRoom, Vector3.zero, Quaternion.identity);
         Rooms.Add(previousRoom);
+        GameObject CurrentRoom = null;
         //Loops through until all the rooms get spawned
         for (int i = 0; i < roomAmount; i++)
         {
-            GameObject CurrentRoom = null;
+            
             //Roll to see if a room will have an offshoot room to know weather to spawn a room with 3 or 2 doors in
             if (alcoveRooms >= 1 && Random.Range(0f,1f) <= ((alcoveRooms +1) / (roomAmount - i)))
             {
@@ -147,8 +156,16 @@ public class MapGenerator : MonoBehaviour
             }
             else
             {
+                if (i == roomAmount - 1)
+                {
+                    CurrentRoom = Instantiate(BossRoom, new Vector3(spawnDistance * i + spawnDistance, 0), Quaternion.identity);
+                }
+                else
+                {
+                    CurrentRoom = Instantiate(availableRooms[Random.Range(0, availableRooms.Count)], new Vector3(spawnDistance * i + spawnDistance, 0), Quaternion.identity);
+
+                }
                 //spawn in a room out of the rooms we have that has 2 doors
-                CurrentRoom = Instantiate(Tier2RoomsPrefabs[Random.Range(0, Tier2RoomsPrefabs.Length)], new Vector3(spawnDistance*i + spawnDistance,0), Quaternion.identity);
                 Rooms.Add(CurrentRoom);
                 //rotate if the room needs to face the other way to have it fit in with the walking through a door
                 if (!previousRoom.GetComponent<RoomData>().DoorForward.left)
@@ -174,5 +191,7 @@ public class MapGenerator : MonoBehaviour
             CurrentRoom.GetComponent<RoomData>().DoorBackwards.TeleportSpot = previousRoom.GetComponent<RoomData>().roomBacktrackSpawn;
             previousRoom = CurrentRoom;
         }
+
+        Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
     }
 }
