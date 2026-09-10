@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591e67766d2502c4a93294adcf6b7c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBehaviour
-  moveSpeed: 7
+  moveSpeed: 20
   dashCooldownTime: 1.5
-  dashForce: 25
-  gravityForce: 50
+  dashForce: 50
+  gravityForce: 20
   maxHealth: 10
   knockbackForce: 20
   playerModel: {fileID: 3223459206470836935}
