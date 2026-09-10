@@ -449,6 +449,7 @@ MonoBehaviour:
   spawnDistance: 800
   availableRooms: []
   BossRoom: {fileID: 6438578845909452853, guid: 2d77fca08c93da44091ec7ffe0beec9a, type: 3}
+  playerPrefab: {fileID: 956766307435515101, guid: 2733adcc8b15da1459d83247a1b01fbb, type: 3}
 --- !u!4 &1406846220
 Transform:
   m_ObjectHideFlags: 0
