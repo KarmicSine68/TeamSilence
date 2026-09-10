@@ -57,7 +57,7 @@ public class RoomSelectManager : MonoBehaviour
     [HideInInspector]
     public int currentCurrency;
     public static Action<int> currencyUpdated;
-
+    public static Action<List<RoomType>> RoomTypesSelected;
 
     private void Awake()
     {
@@ -156,5 +156,10 @@ public class RoomSelectManager : MonoBehaviour
         {
             equippedRoomButtons[i].EquipRoom(RoomType.None);
         }
+    }
+
+    public void StartRun()
+    {
+        RoomTypesSelected?.Invoke(Rooms);
     }
 }
