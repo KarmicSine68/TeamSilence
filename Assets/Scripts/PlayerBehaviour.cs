@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Net.NetworkInformation;
+using TMPro;
 
 public class PlayerBehaviour : PlayerInputHandler
 {
@@ -124,7 +125,7 @@ public class PlayerBehaviour : PlayerInputHandler
         {
             Vector3 xMove = move.ReadValue<Vector2>().x * Camera.main.transform.right;
             Vector3 zMove = move.ReadValue<Vector2>().y * Camera.main.transform.forward;
-            rb.linearVelocity = (xMove + zMove) * moveSpeed;
+            rb.linearVelocity = (xMove + zMove).normalized * moveSpeed;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
             //Original Code
@@ -254,6 +255,14 @@ public class PlayerBehaviour : PlayerInputHandler
 
     void updateUI()
     {
+        if (Health == null || Dash == null)
+        {
+            TMP_Text[] uiElements = FindAnyObjectByType<RoomSelectManager>().ReturnPlayerUI();
+
+            Health = uiElements[0];
+            Dash = uiElements[1];
+        }
+
         if(Health != null)
         {
             Health.text = "Health: " + currentHealth.ToString();
