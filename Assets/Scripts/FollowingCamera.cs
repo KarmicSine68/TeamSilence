@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class FollowingCamera : MonoBehaviour
 {
-    GameObject playerRef;
+    PlayerBehaviour playerRef;
     [SerializeField] Vector3 cameraOffset;
     public Vector3 CameraOffset
     {
@@ -24,7 +24,7 @@ public class FollowingCamera : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        playerRef = FindAnyObjectByType<PlayerBehaviour>().gameObject;
+        playerRef = FindAnyObjectByType<PlayerBehaviour>();
     }
 
     /// <summary>
@@ -32,11 +32,21 @@ public class FollowingCamera : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        //Offsets the camera's position from the player's position
-        Vector3 camPosition = playerRef.transform.position + cameraOffset;
+        if (playerRef == null)
+        {
+            playerRef = FindAnyObjectByType<PlayerBehaviour>();
 
-        //Delete when clamping works with relative player position
-        transform.position = camPosition;
+            
+        }
+        else
+        {
+            //Offsets the camera's position from the player's position
+            Vector3 camPosition = playerRef.transform.position + cameraOffset;
+
+            //Delete when clamping works with relative player position
+            transform.position = camPosition;
+        }
+
 
         //Clamping causes the mouse position to not be fully relative to the player.
         //Will work on fixing later, prioritizing the functionality of the player first
