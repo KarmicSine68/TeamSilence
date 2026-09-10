@@ -12,7 +12,6 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using UnityEngine.SceneManagement;
 using System.Net.NetworkInformation;
 
 public class PlayerBehaviour : PlayerInputHandler
