@@ -113711,6 +113711,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6800408607641767700, guid: f86c274dba4c9ed4a9436ac7241db5cd, type: 3}
+      propertyPath: testPoints
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6800408607641767700, guid: f86c274dba4c9ed4a9436ac7241db5cd, type: 3}
       propertyPath: roomDoors.Array.size
       value: 2
       objectReference: {fileID: 0}

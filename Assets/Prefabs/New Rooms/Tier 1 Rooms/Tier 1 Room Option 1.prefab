@@ -4998,7 +4998,7 @@ GameObject:
   m_Layer: 0
   m_Name: ESpawn2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5011,7 +5011,7 @@ Transform:
   m_GameObject: {fileID: 784692992478539242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.64, y: 0, z: 0.06}
+  m_LocalPosition: {x: 7.64, y: 0.26, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6543,7 +6543,7 @@ GameObject:
   m_Layer: 0
   m_Name: ESpawn1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6556,7 +6556,7 @@ Transform:
   m_GameObject: {fileID: 1370666388603881667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.62, y: 0, z: -0.03}
+  m_LocalPosition: {x: -7.62, y: 0.26, z: -0.03}
   m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children: []
