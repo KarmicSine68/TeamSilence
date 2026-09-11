@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour
   maxHealth: 10
-  moveSpeed: 1.5
+  moveSpeed: 12
   minRunTime: 1.2
   maxRunTime: 2.5
   attackColor: {r: 0.70585763, g: 0.15226057, b: 0.8867924, a: 0}
